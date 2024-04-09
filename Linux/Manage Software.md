@@ -1,4 +1,4 @@
-# Manage Software
+# Manage Software(Quản lý phần mềm)
 
 ## Package
 
