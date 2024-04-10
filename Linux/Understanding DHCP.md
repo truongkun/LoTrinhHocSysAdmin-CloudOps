@@ -19,7 +19,22 @@
 
 ## TCP/ID là gì?
 
-- TCP/IP là cung cấp một phương tiện đáng tin cậy và hiệu quả cho việc truyền tải thông tin trên mạng Internet và mạng nội bộ, đồng thời hỗ trợ việc kết nối và liên mạng giữa các thiết bị mạng khác nhau.
+- là một bộ các giao thức truyền thông được sử dụng để kết nối các thiết bị mạng với nhau trên internet.
+
+- TCP/IP cũng có thể được sử dụng như một giao thức truyền thông trong mạng máy tính riêng (mạng nội bộ)
+
+- TCP/IP chỉ định cách dữ liệu được trao đổi qua internet.
+
+- TCP/IP được thiết kế để đảm bảo độ tin cậy, nó có khả năng khôi phục tự động khi gặp sự cố trong quá trình truyền dữ liệu.
+
+**TCP và IP là hai giao thức chính bên cạnh những giao thức khác trong bộ**
+
+- Bộ giao thức TCP/IP hoạt động như một lớp trừu tượng giữa các ứng dụng internet và hạ tầng router/switch.
+
+**TCP/IP là sự kết hợp giữa 2 giao thức**
+- TCP (Transmission Control Protocol): Là một giao thức truyền dữ liệu đáng tin cậy được sử dụng để thiết lập và duy trì các kết nối giữa các thiết bị trên mạng. TCP đảm bảo rằng dữ liệu được truyền đi một cách an toàn và không bị mất hoặc bị hỏng trên đường truyền.
+
+- IP (Internet Protocol): Là một giao thức địa chỉ dùng để định danh và địa chỉ các thiết bị trong mạng. IP quản lý việc chuyển tiếp dữ liệu giữa các thiết bị trong mạng bằng cách chỉ định địa chỉ IP cho mỗi thiết bị và địa chỉ đích của dữ liệu.
 
 ## Subnet Mask là gì?
 
