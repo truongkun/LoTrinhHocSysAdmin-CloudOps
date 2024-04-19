@@ -13,7 +13,7 @@
 
 `sort:` sắp xếp file
 - -r: sắp xếp giảm dần
-- -k số -cột : sắp xếp cột đó lên đầu
+- -k số cột : sắp xếp cột đó lên đầu
 - -u: loại bỏ các dòng trung lặp
 
 `split:` chia nhỏ file
@@ -23,7 +23,7 @@
 
 `uniq:` xóa nhưng từ trùng lặp
 - -c: đếm số  dòng
-- -i: bỏ qua các dòng trùng lặp liên tiếp, bỏ qua sựu khác biệt về kiểu chữ cái
+- -i: bỏ qua các dòng trùng lặp liên tiếp, bỏ qua sựu khác biệt về kiểu chữ cái 
 
 `head:` Đọc 10 Dòng đầu
 - -n, --line=N: Hiển thị n số dòng

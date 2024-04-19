@@ -73,9 +73,10 @@ free -h
   - PID: Số định dạnh cho 1 tiến trình của hệ điều hành (process id)
   - USER: tên user đang chạy process
   - NI (Nice value): Giá trị Nice, ảnh hưởng đến ưu tiên của tiến trình
+  - S: Trạng thái của tiến trình.
   - %CPU: tỷ lệ % đag sử dụng cpu của process
   - %MEM: tỷ lệ % đang sử dụng mem của process
-  - S: Trạng thái của tiến trình.
+  
 
 **Sử dụng lệnh htop**
 

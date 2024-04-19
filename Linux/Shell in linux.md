@@ -1,6 +1,6 @@
 # Giới thiệu về Linux Shell và Shell Scripting
 
-- Khi chúng ta đang sử dụng bất kỳ hệ điều hành chính nào, chúng ta đang tương tác gián tiếp với shell. 
+- Khi chúng ta đang sử dụng bất kỳ tiếp với shell. hệ điều hành chính nào, chúng ta đang tương tác gián tiếp
 - Trong khi chạy Ubuntu, Linux Mint hoặc bất kỳ bản phân phối Linux nào là chúng ta đang tương tác với shell bằng cách sử dụng thiết bị đầu cuối.
 
 - `Thiết bị đầu cuối` là: các thiết bị kết nối với mạng hoặc hệ thống giao tiếp
@@ -8,7 +8,7 @@
 
 # kernel là gì?
 
-- `Kernel` là một chương trình máy tính là cốt lõi của hệ điều hành máy tính, có toàn quyền kiểm soát mọi thứ trong hệ thống. Nó quản lý các tài nguyên sau của hệ thống Linux –
+- `Kernel` là phần trung tâm của hệ điều hành, làm nhiệm vụ quản lý tài nguyên phần cứng và cung cấp các dịch vụ cần thiết cho các phần mềm ứng dụng.
     - Quản lý tập tin
     - Quản lý quy trình 
     - Quản lý dữ liệu đầu vào/đầu ra 
@@ -20,7 +20,8 @@
 
 ## Shell là gì?
 
-- Shell là một chương trình người dùng đặc biệt `cung cấp giao diện cho người dùng sử dụng các dịch vụ của hệ điều hành.` Shell `chấp nhận các lệnh mà con người có thể đọc được từ người dùng và chuyển đổi chúng thành thứ mà kernel có thể hiểu được.`
+- Shell là một chương trình người dùng đặc biệt `cung cấp giao diện cho người dùng sử dụng các dịch vụ của hệ điều hành.` 
+- Shell `chấp nhận các lệnh mà con người có thể đọc được từ người dùng và chuyển đổi chúng thành thứ mà kernel có thể hiểu được.`
 
 - Shell được phần thành 2 loại:
     - Command Line Shell 
@@ -72,4 +73,4 @@ VD: myscript.sh
 - Tốc độ thực hiện chậm
 - Lỗi thiết kế trong cú pháp hoặc cách triển khai ngôn ngữ
 - Không phù hợp với nhiệm vụ lớn và phức tạp
-- Cung cấp cấu trúc dữ liệu tối thiểu không giống như các ngôn ngữ kịch bản khác. vân vân.
+- Cung cấp cấu trúc dữ liệu tối thiểu không giống như các ngôn ngữ kịch bản khác.
