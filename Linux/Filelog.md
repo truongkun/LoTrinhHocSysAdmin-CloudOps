@@ -14,7 +14,6 @@
   - `messages:` File log tổng hợp các thông điệp từ các ứng dụng và dịch vụ khác nhau trên hệ thống.
   - `secure:` Ghi lại các thông tin liên quan đến bảo mật như đăng nhập thành công, thất bại, thay đổi mật khẩu, v.v.
 
-
 # Rotate log là gì? 
 
 - `Rotate Log` là quá trình chia nhỏ và xoay vòng các file log để đảm bảo rằng chúng không trở nên quá lớn và gây ra các vấn đề về tài nguyên hoặc hiệu suất của hệ thống. 
@@ -46,26 +45,27 @@ sudo nano /etc/logrotate.d/syslog
 
 ```
 /var/log/syslog {
-    rotate 7          // chỉ có thể tạo tối đa 7 bản sao file log
-    daily             // Tuần suất quay log, daily, weekly, monthly
-    missingok         // Tiếp tục quay file log nếu file log không tồn tại
-    notifempty        // không quay log nếu file log trống
-    delaycompress     // Nén file log sau khi log đã đc quay
-    compress          // Né các bản sao của file log bằng gzip
-    postrotate        // Thực hiển lệnh sau khi quay log sau
-      /usr/bin/killall -HUP rsyslogd
-    endscript         // Kết thúc cac lệnh sau khi quay log
+    rotate 7   # Số lượng bản sao tối đa được giữ lại (ở đây là 7 bản sao)
+    daily      # Quay vòng hàng ngày "weely": tuần, "monthly":tháng
+    missingok           # Bỏ qua nếu không tìm thấy tệp nhật ký
+    notifempty          # Không quay vòng nếu tệp nhật ký rỗng
+    delaycompress       # Nén bản sao sau khi quay vòng
+    compress            # Nén các tệp đã quay vòng
+    postrotate          # Lệnh thực thi sau khi quay vòng
+        /usr/bin/killall -HUP rsyslogd
+    endscript           # Kết thúc các lệnh sau khi quay log.
 }
 ```
+rotate 7: số lượng bản sao tối đa đc giữ lại
+daily; quay vòng hàng ngày
+weekly: quay vòng hàng tuần
+monthly: quay vòng hàng tháng
+yearly: quay vòng hàng năm
+missingok: bỏ qua nếu ko tìm thấy file log
+notifempty: ko quay vòng nếu tệp file log rỗng
+delaycompress: nén các bản sao sau khi quay vòng 
+compress: nén các bản sao đã quay vòng
+postrotate: lệnh thực thi sau khi quay vòng
 
-- `rotate 7`: Điều này chỉ định rằng chỉ có tối đa 7 bản sao của file log được giữ lại. Khi số bản sao vượt quá 7, các bản sao cũ hơn sẽ được xoá đi.
-- `daily`: Xác định tần suất quay log, trong trường hợp này là mỗi ngày. Bạn cũng có thể sử dụng `weekly` hoặc `monthly` nếu bạn muốn quay log hàng tuần hoặc hàng tháng.
-- `missingok`: Cho phép quay log tiếp tục nếu file log không tồn tại.
-- `notifempty`: Không quay log nếu file log trống.
-- `delaycompress`: Hoạt động nén file log sau khi log đã được quay. Điều này giúp tránh tình trạng các quá trình đang sử dụng file log khi nén.
-- `compress`: Nén các bản sao của file log bằng gzip.
-- `postrotate`: Lệnh thực hiện sau khi quay log. Trong trường hợp này, nó là lệnh để khởi động lại dịch vụ rsyslog để áp dụng các thay đổi cấu hình mới.
-- `endscript`: Kết thúc các lệnh sau khi quay log.
-
-Sau khi bạn đã cấu hình xong, `logrotate` sẽ tự động quay log cho `/var/log/syslog` theo cấu hình bạn đã thiết lập. Điều này giúp duy trì kích thước file log ổn định và dễ quản lý, đồng thời bảo vệ dữ liệu và hỗ trợ phân tích log hiệu quả.
+endscript: kết thúc các  lệnh sau khi quay vòng
 

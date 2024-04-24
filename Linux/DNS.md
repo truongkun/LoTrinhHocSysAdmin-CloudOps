@@ -14,24 +14,25 @@
 
 
 # Các loại máy chủ DNS sever 
-- `Recursive server(Máy chủ đệ quy):` nhận các truy vấn DNS từ một ứng dụng, chẳng hạn như trình duyệt web. Đây là tài nguyên đầu tiên mà người dùng truy cập và cung cấp câu trả lời cho truy vấn nếu nó được lưu vào bộ nhớ đệm hoặc truy cập vào máy chủ cấp tiếp theo nếu không có. Máy chủ này có thể trải qua nhiều lần truy vấn trước khi trả lời câu trả lời cho máy khách.
+- `Recursive server:` nhận các truy vấn DNS từ một ứng dụng, chẳng hạn như trình duyệt web. Đây là tài nguyên đầu tiên mà người dùng truy cập và cung cấp câu trả lời cho truy vấn nếu nó được lưu vào bộ nhớ đệm hoặc truy cập vào máy chủ cấp tiếp theo nếu không có. Máy chủ này có thể trải qua nhiều lần truy vấn trước khi trả lời câu trả lời cho máy khách.
 >
-- `Root name server(Máy chủ tên gốc):` Máy chủ này là nơi đầu tiên máy chủ đệ quy gửi truy vấn nếu nó không có câu trả lời được lưu trong bộ nhớ đệm. 
+- `Root name server:` Máy chủ này là nơi đầu tiên máy chủ đệ quy gửi truy vấn nếu nó không có câu trả lời được lưu trong bộ nhớ đệm. 
   - Root name server là chỉ mục của tất cả các máy chủ sẽ có thông tin được truy vấn. Các máy chủ này được giám sát bởi Tập đoàn Internet cấp số và tên, cụ thể là một chi nhánh của ICANN được gọi là Cơ quan cấp số hiệu Internet.
 >
 - `TLD server:` Máy chủ gốc sẽ điều khiển truy vấn dựa trên tên miền cấp cao nhất -- .com, .edu hoặc .org trong URL. Đây là một phần cụ thể hơn của việc tra cứu.
 >
-- `Authoritative name server(Máy chủ tên có thẩm quyền):` Máy chủ tên có thẩm quyền là điểm kiểm tra cuối cùng cho truy vấn DNS. Những máy chủ này biết mọi thứ về một miền nhất định và xử lý phần miền phụ của tên miền. Các máy chủ này chứa các bản ghi tài nguyên DNS với thông tin cụ thể về một miền, chẳng hạn như bản ghi A. Họ trả lại bản ghi cần thiết cho máy chủ đệ quy để gửi lại cho máy khách và lưu vào bộ đệm gần máy khách hơn để tra cứu trong tương lai.
+- `Authoritative name server:` là điểm kiểm tra cuối cùng cho truy vấn DNS. Những máy chủ này biết mọi thứ về một miền nhất định và xử lý phần miền phụ của tên miền. Các máy chủ này chứa các bản ghi tài nguyên DNS với thông tin cụ thể về một miền, chẳng hạn như bản ghi A. Họ trả lại bản ghi cần thiết cho máy chủ đệ quy để gửi lại cho máy khách và lưu vào bộ đệm gần máy khách hơn để tra cứu trong tương lai.
 
 # Các loại truy vấn DNS
 
 Các loại truy vấn DNS sau đây là những loại truy vấn chính diễn ra ở các điểm khác nhau trong độ phân giải DNS:
 
-- `Recursive DNS queries(Truy vấn DNS đệ quy)` là những truy vấn diễn ra giữa máy chủ đệ quy và máy khách. Câu trả lời được cung cấp là độ phân giải tên đầy đủ hoặc thông báo lỗi cho biết không thể tìm thấy tên. Truy vấn đệ quy kết thúc bằng câu trả lời hoặc lỗi.
+- `Recursive DNS queries` là những `truy vấn` diễn ra giữa máy chủ đệ quy và máy khách. 
+  - Câu trả lời được cung cấp là độ phân giải tên đầy đủ hoặc thông báo lỗi cho biết không thể tìm thấy tên. Truy vấn đệ quy kết thúc bằng câu trả lời hoặc lỗi.
 >
-- `Iterative DNS queries(Các truy vấn DNS lặp lại)` diễn ra giữa trình phân giải đệ quy, là máy chủ DNS cục bộ và các máy chủ tên không cục bộ, như máy chủ gốc, TLD và máy chủ tên có thẩm quyền. Các truy vấn lặp lại không yêu cầu phân giải tên; thay vào đó, các máy chủ định danh có thể phản hồi bằng một giới thiệu. Máy chủ gốc giới thiệu máy chủ đệ quy đến TLD, tham chiếu nó đến máy chủ có thẩm quyền. Máy chủ có thẩm quyền cung cấp tên miền cho máy chủ đệ quy nếu có. Các truy vấn lặp lại giải quyết bằng câu trả lời hoặc giới thiệu.
+- `Iterative DNS queries` diễn ra giữa trình phân giải đệ quy, là máy chủ DNS cục bộ và các máy chủ tên không cục bộ, như máy chủ gốc, TLD và máy chủ tên có thẩm quyền. Các truy vấn lặp lại không yêu cầu phân giải tên; thay vào đó, các máy chủ định danh có thể phản hồi bằng một giới thiệu. Máy chủ gốc giới thiệu máy chủ đệ quy đến TLD, tham chiếu nó đến máy chủ có thẩm quyền. Máy chủ có thẩm quyền cung cấp tên miền cho máy chủ đệ quy nếu có. Các truy vấn lặp lại giải quyết bằng câu trả lời hoặc giới thiệu.
 >
-- `Nonrecursive queries(Truy vấn không đệ quy)` là những truy vấn mà trình phân giải đệ quy đã biết nơi nhận câu trả lời. Câu trả lời được lưu vào bộ nhớ đệm trên máy chủ đệ quy hoặc máy chủ đệ quy biết bỏ qua máy chủ gốc và máy chủ TLD và truy cập trực tiếp vào một máy chủ có thẩm quyền cụ thể. Nó không đệ quy vì không cần -- và do đó, không có yêu cầu -- đối với bất kỳ truy vấn nào nữa. Các truy vấn không đệ quy giải quyết trong câu trả lời. Nếu trình phân giải đệ quy đã lưu trữ địa chỉ IP từ phiên trước đó và phục vụ địa chỉ đó theo yêu cầu tiếp theo thì đó được coi là truy vấn không đệ quy.
+- `Nonrecursive queries` là những truy vấn mà trình phân giải đệ quy đã biết nơi nhận câu trả lời. Câu trả lời được lưu vào bộ nhớ đệm trên máy chủ đệ quy hoặc máy chủ đệ quy biết bỏ qua máy chủ gốc và máy chủ TLD và truy cập trực tiếp vào một máy chủ có thẩm quyền cụ thể. Nó không đệ quy vì không cần -- và do đó, không có yêu cầu -- đối với bất kỳ truy vấn nào nữa. Các truy vấn không đệ quy giải quyết trong câu trả lời. Nếu trình phân giải đệ quy đã lưu trữ địa chỉ IP từ phiên trước đó và phục vụ địa chỉ đó theo yêu cầu tiếp theo thì đó được coi là truy vấn không đệ quy.
 
 # Các loại DNS bản ghi DNS phổ biến
 
