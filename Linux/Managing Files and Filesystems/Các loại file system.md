@@ -1,6 +1,6 @@
 # File system là gì?
 
-- `File System` là một phần mềm hoặc hệ thống được sử dụng để quản lý, tổ chức và lưu trữ dữ liệu trên các thiết bị lưu trữ như đĩa cứng, ổ đĩa USB hoặc thẻ nhớ. 
+- `File System` là `một hệ thống được sử dụng để quản lý, tổ chức và lưu trữ dữ liệu trên các thiết bị lưu trữ` như đĩa cứng, ổ đĩa USB hoặc thẻ nhớ. 
 - `File system` cung cấp cho người dùng một giao diện để truy cập và quản lý các tệp tin và thư mục trong một hệ thống lưu trữ. 
 - `File System` cũng đảm bảo tính toàn vẹn và bảo mật của dữ liệu bằng cách kiểm soát quyền truy cập và cung cấp các tính năng sao lưu và khôi phục dữ liệu. 
 - Một hệ thống tập tin phải hỗ trợ đủ các tính năng như tên file, đường dẫn, kích thước, quyền truy cập và thời gian tạo, sửa đổi và truy cập file. 

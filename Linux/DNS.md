@@ -14,14 +14,23 @@
 
 
 # Các loại máy chủ DNS sever 
-- `Recursive server:` nhận các truy vấn DNS từ một ứng dụng, chẳng hạn như trình duyệt web. Đây là tài nguyên đầu tiên mà người dùng truy cập và cung cấp câu trả lời cho truy vấn nếu nó được lưu vào bộ nhớ đệm hoặc truy cập vào máy chủ cấp tiếp theo nếu không có. Máy chủ này có thể trải qua nhiều lần truy vấn trước khi trả lời câu trả lời cho máy khách.
+- `Recursive server:` nhận các truy vấn DNS từ một ứng dụng, chẳng hạn như trình duyệt web.
+  - khi resolver server nhận đc truy vấn nó sẽ kiểm tra bộ nhớ cache. Nếu ko thấy nó sẽ gửi truy vấn đến cấp độ cao hơn: DNS root server
 >
-- `Root name server:` Máy chủ này là nơi đầu tiên máy chủ đệ quy gửi truy vấn nếu nó không có câu trả lời được lưu trong bộ nhớ đệm. 
-  - Root name server là chỉ mục của tất cả các máy chủ sẽ có thông tin được truy vấn. Các máy chủ này được giám sát bởi Tập đoàn Internet cấp số và tên, cụ thể là một chi nhánh của ICANN được gọi là Cơ quan cấp số hiệu Internet.
+- `DNS Root server:` Là dịch vụ phân giải tên miền gốc.
+  - Tất cả tên miền trên thế giới đều phải thông qua DNS root server(như .com, .org, .vn, .net, ...)
+  - Trên thế giới có 13 DNS root server: đc vận hành bởi 12 tổ chức khác nhau và mỗi root server có 1 địa chỉ ip duy nhất của riêng nó.
+  >
+  - Khi nhận đc truy vấn nó cũng không biết địa chỉ ip đó là gì, nhưng nó biết nơi nào cần hỏi để giúp reslver server tìm ra địa chỉ ip này. Trả hạn bạn tìm 1 tên miền có tên là .com thì root server sẽ điều hướng resolver đến TLP server của miền `.com`. Vì vậy resolver server sẽ gửi yêu cầu đến TLD server.
 >
-- `TLD server:` Máy chủ gốc sẽ điều khiển truy vấn dựa trên tên miền cấp cao nhất -- .com, .edu hoặc .org trong URL. Đây là một phần cụ thể hơn của việc tra cứu.
+- `TLD server:` Khi nhận đc truy vấn, tuy nó cx kb nhưng nó sẽ biết chính xác ai biết biết để lấy được thông tin này.
+- TLD server sẽ điều hướng resolver server đến cấp độ tiếp theo là authoritative name server.
+- Resolver server gửi truy vấn đến authoritative name server.
 >
-- `Authoritative name server:` là điểm kiểm tra cuối cùng cho truy vấn DNS. Những máy chủ này biết mọi thứ về một miền nhất định và xử lý phần miền phụ của tên miền. Các máy chủ này chứa các bản ghi tài nguyên DNS với thông tin cụ thể về một miền, chẳng hạn như bản ghi A. Họ trả lại bản ghi cần thiết cho máy chủ đệ quy để gửi lại cho máy khách và lưu vào bộ đệm gần máy khách hơn để tra cứu trong tương lai.
+- `Authoritative name server:` là điểm kiểm tra cuối cùng cho truy vấn DNS. Những máy chủ này biết mọi thứ về một miền nhất định và xử lý phần miền phụ của tên miền. 
+- Khi authoritative name server nhận đc truy vấn nó sẽ gửi địa chỉ ip tương ứng cho resolver server. Đồng thời resolver server sẽ lưu địa chỉ ip này vào trong cache để cho máy bạn hoặc người khác truy cập lần sau không phải thực hiện lại các bước trên nữa
+- Cuối cùng resolver server sẽ cho máy tính bạn biết địa chỉ ip tương ứng.
+- máy tính của bạn sẽ hiện thị thông tin cần yêu cầu.
 
 # Các loại truy vấn DNS
 
