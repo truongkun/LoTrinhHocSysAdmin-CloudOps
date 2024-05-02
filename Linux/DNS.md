@@ -21,7 +21,7 @@
   - Tất cả tên miền trên thế giới đều phải thông qua DNS root server(như .com, .org, .vn, .net, ...)
   - Trên thế giới có 13 DNS root server: đc vận hành bởi 12 tổ chức khác nhau và mỗi root server có 1 địa chỉ ip duy nhất của riêng nó.
   >
-  - Khi nhận đc truy vấn nó cũng không biết địa chỉ ip đó là gì, nhưng nó biết nơi nào cần hỏi để giúp reslver server tìm ra địa chỉ ip này. Trả hạn bạn tìm 1 tên miền có tên là .com thì root server sẽ điều hướng resolver đến top-level domain server của miền `.com`. Vì vậy resolver server sẽ gửi yêu cầu đến TLD server.
+  - Khi nhận đc truy vấn nó cũng không biết địa chỉ ip đó là gì, nhưng nó biết nơi nào cần hỏi để giúp reslver server tìm ra địa chỉ ip này. Trả hạn bạn tìm 1 tên miền có tên là .com thì root server sẽ điều hướng resolver đến top-level domain server của miền `.com`. Vì vậy resolver server sẽ gửi yêu cầu đến top-level domain server.
 >
 - `A top-level domain server:` Khi nhận đc truy vấn, tuy nó cx kb nhưng nó sẽ biết chính xác ai biết biết để lấy được thông tin này.
 - top-level domain server sẽ điều hướng resolver server đến cấp độ tiếp theo là authoritative name server.
@@ -39,9 +39,9 @@ Các loại truy vấn DNS sau đây là những loại truy vấn chính diễn
 - `Recursive DNS queries` là những `truy vấn` diễn ra giữa máy chủ đệ quy và máy khách. 
   - Câu trả lời được cung cấp là độ phân giải tên đầy đủ hoặc thông báo lỗi cho biết không thể tìm thấy tên. Truy vấn đệ quy kết thúc bằng câu trả lời hoặc lỗi.
 >
-- `Iterative DNS queries` diễn ra giữa trình phân giải đệ quy, là máy chủ DNS cục bộ và các máy chủ tên không cục bộ, như máy chủ gốc, TLD và máy chủ tên có thẩm quyền. Các truy vấn lặp lại không yêu cầu phân giải tên; thay vào đó, các máy chủ định danh có thể phản hồi bằng một giới thiệu. Máy chủ gốc giới thiệu máy chủ đệ quy đến TLD, tham chiếu nó đến máy chủ có thẩm quyền. Máy chủ có thẩm quyền cung cấp tên miền cho máy chủ đệ quy nếu có. Các truy vấn lặp lại giải quyết bằng câu trả lời hoặc giới thiệu.
+- `Iterative DNS queries` diễn ra giữa trình phân giải đệ quy, là máy chủ DNS cục bộ và các máy chủ tên không cục bộ, như máy chủ gốc, top-level domain và máy chủ tên có thẩm quyền. Các truy vấn lặp lại không yêu cầu phân giải tên; thay vào đó, các máy chủ định danh có thể phản hồi bằng một giới thiệu. Máy chủ gốc giới thiệu máy chủ đệ quy đến top-level domain, tham chiếu nó đến máy chủ có thẩm quyền. Máy chủ có thẩm quyền cung cấp tên miền cho máy chủ đệ quy nếu có. Các truy vấn lặp lại giải quyết bằng câu trả lời hoặc giới thiệu.
 >
-- `Nonrecursive queries` là những truy vấn mà trình phân giải đệ quy đã biết nơi nhận câu trả lời. Câu trả lời được lưu vào bộ nhớ đệm trên máy chủ đệ quy hoặc máy chủ đệ quy biết bỏ qua máy chủ gốc và máy chủ TLD và truy cập trực tiếp vào một máy chủ có thẩm quyền cụ thể. Nó không đệ quy vì không cần -- và do đó, không có yêu cầu -- đối với bất kỳ truy vấn nào nữa. Các truy vấn không đệ quy giải quyết trong câu trả lời. Nếu trình phân giải đệ quy đã lưu trữ địa chỉ IP từ phiên trước đó và phục vụ địa chỉ đó theo yêu cầu tiếp theo thì đó được coi là truy vấn không đệ quy.
+- `Nonrecursive queries` là những truy vấn mà trình phân giải đệ quy đã biết nơi nhận câu trả lời. Câu trả lời được lưu vào bộ nhớ đệm trên máy chủ đệ quy hoặc máy chủ đệ quy biết bỏ qua máy chủ gốc và máy chủ top-level domain và truy cập trực tiếp vào một máy chủ có thẩm quyền cụ thể. Nó không đệ quy vì không cần -- và do đó, không có yêu cầu -- đối với bất kỳ truy vấn nào nữa. Các truy vấn không đệ quy giải quyết trong câu trả lời. Nếu trình phân giải đệ quy đã lưu trữ địa chỉ IP từ phiên trước đó và phục vụ địa chỉ đó theo yêu cầu tiếp theo thì đó được coi là truy vấn không đệ quy.
 
 # Các loại DNS bản ghi DNS phổ biến
 
