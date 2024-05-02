@@ -21,10 +21,10 @@
   - Tất cả tên miền trên thế giới đều phải thông qua DNS root server(như .com, .org, .vn, .net, ...)
   - Trên thế giới có 13 DNS root server: đc vận hành bởi 12 tổ chức khác nhau và mỗi root server có 1 địa chỉ ip duy nhất của riêng nó.
   >
-  - Khi nhận đc truy vấn nó cũng không biết địa chỉ ip đó là gì, nhưng nó biết nơi nào cần hỏi để giúp reslver server tìm ra địa chỉ ip này. Trả hạn bạn tìm 1 tên miền có tên là .com thì root server sẽ điều hướng resolver đến TLP server của miền `.com`. Vì vậy resolver server sẽ gửi yêu cầu đến TLD server.
+  - Khi nhận đc truy vấn nó cũng không biết địa chỉ ip đó là gì, nhưng nó biết nơi nào cần hỏi để giúp reslver server tìm ra địa chỉ ip này. Trả hạn bạn tìm 1 tên miền có tên là .com thì root server sẽ điều hướng resolver đến top-level domain server của miền `.com`. Vì vậy resolver server sẽ gửi yêu cầu đến TLD server.
 >
-- `TLD server:` Khi nhận đc truy vấn, tuy nó cx kb nhưng nó sẽ biết chính xác ai biết biết để lấy được thông tin này.
-- TLD server sẽ điều hướng resolver server đến cấp độ tiếp theo là authoritative name server.
+- `A top-level domain server:` Khi nhận đc truy vấn, tuy nó cx kb nhưng nó sẽ biết chính xác ai biết biết để lấy được thông tin này.
+- top-level domain server sẽ điều hướng resolver server đến cấp độ tiếp theo là authoritative name server.
 - Resolver server gửi truy vấn đến authoritative name server.
 >
 - `Authoritative name server:` là điểm kiểm tra cuối cùng cho truy vấn DNS. Những máy chủ này biết mọi thứ về một miền nhất định và xử lý phần miền phụ của tên miền. 
