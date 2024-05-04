@@ -26,25 +26,25 @@
 
 Bước 1: Đầu tiên, hãy mở tùy chọn boot và chọn Advanced options for Ubuntu.
 
-![alt text](/img/fsck1.png)
+![alt text](/Linux/img/fsck1.png)
 
 Bước 2: Sau đó chọn chế độ Recovery.
 
-![alt text](/img/fsck2.png)
+![alt text](/Linux/img/fsck2.png)
 
 Bước 3: Sau đó chọn tùy chọn fsck.
 
-![alt text](/img/fsck3.png)
+![alt text](/Linux/img/fsck3.png)
 
 Nó sẽ yêu cầu hệ thống file mount lại. Chọn Yes.
 
-![alt text](/img/fsck4.png)
+![alt text](/Linux/img/fsck4.png)
 
 Bây giờ, bạn có thể thấy màn hình sau:
 
-![alt text](/img/fsck5.png)
+![alt text](/Linux/img/fsck5.png)
 
 Bước 4: Chọn Resume.
 
-![alt text](/img/fsck6.png)
+![alt text](/Linux/img/fsck6.png)
 
