@@ -24,19 +24,19 @@ Cơ chế hoạt động của DNS (Domain Name System) được thực hiện t
 - Trả về địa chỉ IP: Máy chủ DNS của tên miền cuối cùng sẽ trả về địa chỉ IP tương ứng với tên miền đó cho máy tính của bạn.
 - Caching kết quả: Kết quả được trả về sẽ được lưu trữ trong bộ nhớ cache của máy tính để tăng tốc độ truy cập cho các lần truy cập sau.
 
-## Các loại máy chủ DNS sever 
+## Các loại máy chủ DNS server   
 
 - `Resolver Server` -> (Trung gian): là nhà cùng cấp dịch vụ internet
 - `DNS Root Server:` là dịch vụ phân giải tên miền gốc. Tất cả các tên miền trên thế giới đều phải thông qua nó(.com, .org, .vn, .net, ...). 
 - `Top-Level-Domain Server:` chịu trách nhiệm quản lý một số lượng lớn các miền cấp cao nhất (TLDs) trong hệ thống DNS. Cụ thể, mỗi TLD server quản lý một hoặc nhiều TLD cụ thể, chẳng hạn như .com, .net, .org, .edu, .gov, .info, vv.
 - `Authoritative Name Server:` có trách nhiệm biết mọi thứ về tên miền bao gồm cả địa chỉ ip. chúng là cơ quan cuối cùng
 
-![alt text](img/dns.png)
-
+![alt text](img/dns2.png)
 
 ## Các loại truy vấn DNS
-- `Truy vấn Recursive:` Máy tính yêu cầu địa chỉ IP hoặc xác nhận rằng máy chủ DNS không biết địa chỉ IP đó.
+- `Truy vấn Recursive:` DNS client yêu cầu máy chủ DNS (thường là recursive DNS resolver). Sẽ trả lời máy khách bằng bản ghi tài nguyên được yêu cầu. Hoặc thông báo lỗi nếu resolver không thể tìm thấy bản ghi.
 - `Truy vấn Iterative:` Nếu DNS Server không có địa chỉ IP, nó sẽ trả về Authoritative Name Server hoặc TLD Name Server. Người yêu cầu sẽ tiếp tục quá trình lặp đi lặp lại này cho đến khi tìm thấy câu trả lời hoặc hết thời gian.
+>
 - `Truy vấn Non-Recursive:` Trình phân giải DNS sẽ sử dụng truy vấn này để tìm địa chỉ IP mà nó không có trong bộ nhớ Cache. Chúng được giới hạn trong một yêu cầu duy nhất để giới hạn việc sử dụng băng thông mạng.
 
 ## Các loại DNS bản ghi DNS phổ biến
