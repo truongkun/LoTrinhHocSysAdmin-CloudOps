@@ -1,55 +1,62 @@
 # DNS là gì?
 
 - DNS, viết tắt của “Domain Name System”, là hệ thống quản lý và dịch tên miền (hostname) thành địa chỉ IP để truy cập các trang web trên internet. 
-
-- Nó hoạt động dựa trên cấu trúc phân cấp và liên lạc với các máy chủ DNS để tìm kiếm thông tin về tên miền và địa chỉ IP tương ứng.
-
-- Domain Name System có mục tiêu chính là đơn giản hóa việc truy cập và sử dụng internet bằng cách phân giải tên miền thành địa chỉ IP.
-
+>
 ## Chức năng của Domain Name System
 
 - Domain name system cũng giống như một cuốn danh bạ điện thoại. Nghĩa là thay vì phải nhớ hàng tá số điện thoại với một đống con số, thì bạn chỉ cần nhớ tên của chủ nhân số điện thoại thôi. Tương ứng với ví dụ này, số điện thoại sẽ là địa chỉ IP của Website, còn tên chủ nhân chính là tên miền của website đó.
 
-> VD: khi bạn gõ “www.google.com” vào trình duyệt, máy chủ DNS sẽ lấy địa chỉ của máy chủ Google là “74.125.236.37”. Sau đó, bạn sẽ thấy trang home của Google tải trang trên trình duyệt mà bạn đang sử dụng. Đó là quá trình phân giải Domain Name System.
-
 ## Cơ chế hoạt động của DNS
 
-Cơ chế hoạt động của DNS (Domain Name System) được thực hiện theo các bước sau:
+Cơ chế hoạt động của DNS (Domain Name System) được thực hiện 1 truy vấn như sau:
 
-- Gửi yêu cầu: Khi bạn nhập một tên miền vào trình duyệt web hoặc bất kỳ ứng dụng nào sử dụng mạng, máy tính của bạn gửi một yêu cầu DNS đến máy chủ DNS.
-- Caching: Trước tiên, trình duyệt hoặc máy chủ DNS trên máy tính của bạn kiểm tra xem liệu nó đã lưu trữ thông tin cho tên miền này trước đó không. Nếu có, nó sẽ trả về kết quả từ bộ nhớ cache mà không cần phải thực hiện các bước tiếp theo.
-- Yêu cầu từ máy chủ gốc (Root DNS Servers): Nếu không có thông tin nào được lưu trữ trong cache, máy tính của bạn sẽ gửi một yêu cầu đến máy chủ DNS gốc. Máy chủ DNS gốc này biết về toàn bộ hệ thống DNS và sẽ hướng dẫn yêu cầu đến máy chủ DNS cụ thể hơn.
-- Yêu cầu từ máy chủ Top-Level Domain (TLD): Máy chủ DNS gốc sẽ hướng dẫn yêu cầu đến máy chủ DNS của top-level domain (TLD) tương ứng với tên miền (ví dụ: .com, .org, .net). Máy chủ TLD này biết về các máy chủ DNS của các domain cụ thể.
-- Yêu cầu từ máy chủ tên miền cụ thể: Máy chủ DNS của TLD sẽ hướng dẫn yêu cầu đến máy chủ DNS của tên miền cụ thể. Ví dụ, nếu bạn đang truy cập vào "example.com", máy chủ DNS của TLD ".com" sẽ hướng dẫn yêu cầu đến máy chủ DNS của tên miền "example.com".
-- Trả về địa chỉ IP: Máy chủ DNS của tên miền cuối cùng sẽ trả về địa chỉ IP tương ứng với tên miền đó cho máy tính của bạn.
-- Caching kết quả: Kết quả được trả về sẽ được lưu trữ trong bộ nhớ cache của máy tính để tăng tốc độ truy cập cho các lần truy cập sau.
+1. **Recursor Nameserver**: (trung gian)
+   - Khi một máy tính hoặc thiết bị kết nối với internet cần phải truy vấn một địa chỉ IP cho một tên miền như "example.com", nó sẽ gửi yêu cầu này đến Recursor Nameserver.
+   - Recursor Nameserver sẽ kiểm tra trong bộ nhớ cache của nó xem nó đã lưu trữ thông tin cho tên miền này trước đó hay không. Nếu có, nó sẽ trả về địa chỉ IP từ cache.
+   - Nếu thông tin không được tìm thấy trong cache, Recursor Nameserver sẽ bắt đầu quá trình tìm kiếm bằng cách gửi yêu cầu truy vấn đến các máy chủ DNS khác để tìm ra địa chỉ IP phù hợp.
+
+2. **Root NameServer**:
+   - Nếu Recursor Nameserver không tìm thấy thông tin trong cache của mình, nó sẽ gửi yêu cầu truy vấn đến một trong 13 máy chủ Root NameServer trên toàn cầu.
+   - Root NameServer sẽ trả lời với thông tin về TLD (Top-Level-Domain) NameServer phù hợp dựa trên phần mở rộng của tên miền được truy vấn. 
+   - Ví dụ, nếu tên miền là "example.com", Root NameServer sẽ trả lại thông tin về máy chủ TLD cho miền ".com".
+
+3. **Top-Level-Domain NameServer**:
+   - Recursor Nameserver sau đó gửi yêu cầu truy vấn tiếp theo đến máy chủ TLD NameServer cho phần mở rộng của tên miền (ví dụ: .com).
+   - TLD NameServer sẽ trả lại thông tin về máy chủ Authoritative NameServer cho tên miền được truy vấn, chẳng hạn như "example.com".
+
+4. **Authoritative NameServer**:
+   - Cuối cùng, Recursor Nameserver gửi yêu cầu truy vấn cuối cùng đến máy chủ Authoritative NameServer cho tên miền cụ thể.
+   - Authoritative NameServer sẽ trả về địa chỉ IP chính xác của tên miền "example.com".
+   - Recursor Nameserver lưu trữ thông tin này trong bộ nhớ cache của mình để sử dụng cho các truy vấn tương lai và cung cấp địa chỉ IP cho client gửi yêu cầu ban đầu.
 
 ## Các loại máy chủ DNS server   
 
-- `Resolver Server` -> (Trung gian): là nhà cùng cấp dịch vụ internet
-- `DNS Root Server:` là dịch vụ phân giải tên miền gốc. Tất cả các tên miền trên thế giới đều phải thông qua nó(.com, .org, .vn, .net, ...). 
-- `Top-Level-Domain Server:` chịu trách nhiệm quản lý một số lượng lớn các miền cấp cao nhất (TLDs) trong hệ thống DNS. Cụ thể, mỗi TLD server quản lý một hoặc nhiều TLD cụ thể, chẳng hạn như .com, .net, .org, .edu, .gov, .info, vv.
-- `Authoritative Name Server:` có trách nhiệm biết mọi thứ về tên miền bao gồm cả địa chỉ ip. chúng là cơ quan cuối cùng
+- `Recursor Nameserver` là một máy chủ có nhiệm vụ chuyển đổi tên miền thành địa chỉ IP. Được hoạt động như một thư viện, lưu trữ thông tin về địa chỉ IP của các trang web và ứng dụng. 
+    
+- `Root NameServer:` là dịch vụ phân giải tên miền gốc. Trên thế giới có tất cả 12 DNS root Server. 
+  - `DNS root Server` quản lý tất cả các tên miền Top-level. Nó chứa tất cả thông tin về domain và ip của các Top-level-domain nameserver.
+    ![alt text](/Linux/img/dns-root-server.png)
+  - `VD:` Khi truy vấn đến Root NameServer, Root Nameserver sẽ trả lại thông tin TLD Nameserver để client tiếp tục truy vấn kết quả.
+- `Top-Level-Domain NameServer:` là máy chủ tên miền cấp cao nhất, chịu trách nhiệm lưu trữ thông tin về các tên miền có phần mở rộng chung (gTLD), chẳng hạn như .com, .org, .net.
+    - VD: Khi nhận đc truy vấn, TLD Nameserver sẽ trả lại cho client thông tin Authoritative Nameserver nơi quản lý tên miền đang được truy vấn 
+- `Authoritative NameServer:` là nơi lưu trữ thông tin về tên miền và địa chỉ IP mà nó quản lý. Là điểm cuối của quá trình truy vấn và phân giải địa chỉ IP cần thiết cho Recursor Nameserver.
 
 ![alt text](img/dns2.png)
 
 ## Các loại truy vấn DNS
-- `Truy vấn Recursive:` DNS client yêu cầu máy chủ DNS (thường là recursive DNS resolver). Sẽ trả lời máy khách bằng bản ghi tài nguyên được yêu cầu. Hoặc thông báo lỗi nếu resolver không thể tìm thấy bản ghi.
-- `Truy vấn Iterative:` Nếu DNS Server không có địa chỉ IP, nó sẽ trả về Authoritative Name Server hoặc TLD Name Server. Người yêu cầu sẽ tiếp tục quá trình lặp đi lặp lại này cho đến khi tìm thấy câu trả lời hoặc hết thời gian.
+- `Truy vấn Recursive:` DNS client yêu cầu máy chủ DNS trả về kết quả hoặc thông báo lỗi nếu không tìm thấy bản ghi tài nguyên.
 >
-- `Truy vấn Non-Recursive:` Trình phân giải DNS sẽ sử dụng truy vấn này để tìm địa chỉ IP mà nó không có trong bộ nhớ Cache. Chúng được giới hạn trong một yêu cầu duy nhất để giới hạn việc sử dụng băng thông mạng.
-
+- `Truy vấn Iterative:` Nếu DNS Server không có địa chỉ IP, nó sẽ trả về Authoritative Name Server hoặc TLD Name Server và quá trình này sẽ lặp đi lặp lại cho đến khi có kết quả hoặc đạt đến giới hạn thời gian.
+>
+- `Truy vấn Non-Recursive:` DNS client yêu cầu máy chủ DNS cho một bản ghi cụ thể mà máy chủ đã lưu trữ trong bộ nhớ cache của mình, giúp giảm tải cho hệ thống DNS bằng cách tránh việc truy cập lại Internet để lấy thông tin.
 ## Các loại DNS bản ghi DNS phổ biến
 
 Có nhiều loại bản ghi DNS, mỗi loại có mục đích riêng trong việc biểu thị cách xử lý một truy vấn. Các bản ghi DNS phổ biến như sau:
 
-- `A Record (viết tắt là A):` Là Host Record cho IPv4, xác định địa chỉ IP của máy chủ.
-- `Quad-A Record (viết tắt là AAAA ):` Đây là Host Record cho IPv6, xác định địa chỉ IP của máy chủ.
-- `Alias Record (CName):` Có chức năng chuyển hướng một tên miền sang một tên miền khác.
-- `Mail Exchanger Record (MX):` Xác định Host Name cho một Mail Server.
-- `Service Location Record (SRV):` Cho phép người dùng tìm một dịch vụ cụ thể.
-- `Name Server Record (NS):` Hướng người dùng đến các máy chủ DNS khác.
-- `Start Of Authority (SOA):` Chứa dữ liệu trong DNS Zone cung cấp thông tin quản trị về Zone đó và các bản ghi DNS khác.
-- `Reverse-lookup Pointer Record (PTR):` Cho phép người dùng tra cứu ngược lại nơi họ cung cấp địa chỉ IP và truy xuất Hostname.
-- `Certificate Record (CERT):` Hồ sơ về chứng chỉ và danh sách các chứng chỉ đã bị thu hồi (Certificate Revocation List – CRLs) có liên quan.
-- `Text Record (TXT):` Chứa thông tin văn bản có thể đọc được,các thông tin này có thể có giá trị đối với những người khác đang truy cập vào Server.
+- `A Record (viết tắt là A):` Sử dụng để chuyển đổi một `domain name` thành một địa chỉ IPv4.
+- `Quad-A Record (viết tắt là AAAA ):` Sử dụng để chuyển đổi một `domain name` thành một địa chỉ IPv6.
+- `Alias Record (CName):` Bản ghi CNAME chỉ định một tên miền cần phải được truy vấn để giải quyết truy vấn DNS ban đầu. Vì vậy các bản ghi CNAME được sử dụng để tạo các bí danh tên miền. Bản ghi CNAME thực sự hữu ích khi chúng ta muốn bí danh tên miền của chúng ta tới miền bên ngoài. Trong các trường hợp khác, chúng ta có thể xóa các bản ghi CNAME và thay thế chúng bằng các bản ghi A.
+- `Mail Exchanger Record (MX):` MX chỉ định một máy chủ trao đổi thư cho một tên miền DNS. Thông tin được sử dụng bởi Giao thức truyền thư đơn giản (SMTP) để định tuyến email đến máy chủ thích hợp. Thông thường, có nhiều hơn một máy chủ trao đổi thư cho một miền DNS và mỗi DNS trong số chúng đã đặt ưu tiên.
+- `Name Server Record (NS):` Lưu thông tin về Name Server. Nó định danh cho một máy chủ có thẩm quyền về một zone nào đó.
+- `Start Of Authority (SOA):` Hồ sơ ghi rõ thông tin cốt lõi về vùng DNS, bao gồm name server chính, email của quản trị viên tên miền, số sê-ri miền và một số bộ đếm hiện thời liên quan đến refresh lại zone.
+- `Reverse-lookup Pointer Record (PTR):` được sử dụng để  tra cứu tên miền dựa trên địa chỉ IP.
