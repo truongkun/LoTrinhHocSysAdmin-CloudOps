@@ -49,14 +49,28 @@ Cơ chế hoạt động của DNS (Domain Name System) được thực hiện 1
 - `Truy vấn Iterative:` Nếu DNS Server không có địa chỉ IP, nó sẽ trả về Authoritative Name Server hoặc TLD Name Server và quá trình này sẽ lặp đi lặp lại cho đến khi có kết quả hoặc đạt đến giới hạn thời gian.
 >
 - `Truy vấn Non-Recursive:` DNS client yêu cầu máy chủ DNS cho một bản ghi cụ thể mà máy chủ đã lưu trữ trong bộ nhớ cache của mình, giúp giảm tải cho hệ thống DNS bằng cách tránh việc truy cập lại Internet để lấy thông tin.
-## Các loại DNS bản ghi DNS phổ biến
+### Các loại Query trong DNS
 
-Có nhiều loại bản ghi DNS, mỗi loại có mục đích riêng trong việc biểu thị cách xử lý một truy vấn. Các bản ghi DNS phổ biến như sau:
+- **Recursive query**: DNS client yêu cầu máy chủ DNS (thường là Recursor nameserver). Sẽ trả lời máy khách bằng bản ghi tài nguyên được yêu cầu. Hoặc thông báo lỗi nếu resolver không thể tìm thấy bản ghi.
 
-- `A Record (viết tắt là A):` Sử dụng để chuyển đổi một `domain name` thành một địa chỉ IPv4.
-- `Quad-A Record (viết tắt là AAAA ):` Sử dụng để chuyển đổi một `domain name` thành một địa chỉ IPv6.
-- `Alias Record (CName):` Bản ghi CNAME chỉ định một tên miền cần phải được truy vấn để giải quyết truy vấn DNS ban đầu. Vì vậy các bản ghi CNAME được sử dụng để tạo các bí danh tên miền. Bản ghi CNAME thực sự hữu ích khi chúng ta muốn bí danh tên miền của chúng ta tới miền bên ngoài. Trong các trường hợp khác, chúng ta có thể xóa các bản ghi CNAME và thay thế chúng bằng các bản ghi A.
-- `Mail Exchanger Record (MX):` MX chỉ định một máy chủ trao đổi thư cho một tên miền DNS. Thông tin được sử dụng bởi Giao thức truyền thư đơn giản (SMTP) để định tuyến email đến máy chủ thích hợp. Thông thường, có nhiều hơn một máy chủ trao đổi thư cho một miền DNS và mỗi DNS trong số chúng đã đặt ưu tiên.
-- `Name Server Record (NS):` Lưu thông tin về Name Server. Nó định danh cho một máy chủ có thẩm quyền về một zone nào đó.
-- `Start Of Authority (SOA):` Hồ sơ ghi rõ thông tin cốt lõi về vùng DNS, bao gồm name server chính, email của quản trị viên tên miền, số sê-ri miền và một số bộ đếm hiện thời liên quan đến refresh lại zone.
-- `Reverse-lookup Pointer Record (PTR):` được sử dụng để  tra cứu tên miền dựa trên địa chỉ IP.
+- **Iterative query**: Là truy vấn mà DNS Server có thể cung cấp câu trả lời hoặc 1 phần câu trả lời (như 1 lời giới thiệu) cho clients (hoặc đưa ra thông báo lỗi). Với truy vấn này, nếu DNS Server có câu trả lời cho truy vấn trong bộ nhớ đệm của nó, nó sẽ trả lại kết quả cho người dùng, nếu không, nó sẽ trả lại lời giới thiệu đến DNS Server biết được câu trả lời của truy vấn, để người dùng tự truy vấn.
+
+- **Non-recursive query**: Thông thường điều này sẽ xảy ra khi DNS resolver client truy vấn máy chủ DNS một record mà server có quyền truy cập hoặc bản ghi tồn tại bên trong bộ đệm của server. Thông thường, một máy chủ DNS sẽ lưu các bản ghi DNS để ngăn chặn việc tiêu thụ thêm băng thông và giảm tải cho các máy chủ DNS khác.
+
+### Các DNS Record thường dùng
+
+- **A record** : dùng để phân giải tên miền địa chỉ ipv4.
+
+- **AAAA record** : dùng để phân giải tên miền địa chỉ ipv6.
+
+- **CNAME record** : dùng để phân giải tên miền phụ thành tên miền đích
+
+- **NS record** : Có chức năng chỉ ra địa chỉ DNS server
+
+- **MX record** : có chức năng chỉ ra địa chỉ mail server. MX Record chỉ định server nào quản lý các dịch vụ Email của tên miền đó.
+
+- **PTR Record** : dùng để phân giải địa chỉ ip sang tên miền.
+
+- **SRV record** : dùng để xác định vị trí của các dịch vụ đặc biệt trong đường mạng 
+
+- **TXT Record** : chứa các dữ liệu theo định dạng văn bản thường dùng để xác thực nguời sử dụng tên miền.

@@ -2682,7 +2682,7 @@ Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP củ
 
 - **Bước 1** : Máy client của người dùng sẽ gửi truy vấn về tên miền example.vn tới máy chủ quản lý tên miền (name server) cục bộ để tìm ra IP của example.vn
 
-- **Bước 2** : Máy chủ tên miền cục bộ này sẽ tiến hành rà soát trong cơ sở dữ liệu của nó xem có thông tin về tên miền example.vn ứng với IP nào hay không. Nếu có, nó sẽ trả ngay lại IP của example.vn cho client. Nếu không, nó sẽ gửi truy vấn tới ROOT Name Server.
+- **Bước 2** : Local Nameserver này sẽ tiến hành rà soát trong cơ sở dữ liệu của nó xem có thông tin về tên miền example.vn ứng với IP nào hay không. Nếu có, nó sẽ trả ngay lại IP của example.vn cho client. Nếu không, nó sẽ gửi truy vấn tới ROOT Name Server.
 
 - **Bước 3** : Tuy nhiên, Root Name Server không có chứa dữ liệu về tên miền cũng như IP, mà nó chỉ có dữ liệu về máy chủ quản lý tên miền đó (.vn). Nên Root Name Server sẽ gửi thông tin về địa chỉ máy chủ quản lý các tên miền .VN về cho máy chủ tên miền cục bộ.
 
@@ -2720,23 +2720,21 @@ Là máy chủ chứa toàn bộ thông tin về tên miền mà nó quản lý 
 
 ### Các DNS Record thường dùng
 
-- **SOA record** : Là bản ghi chứa các thông tin quan trọng về tên miền như email admin, time to live mặc định,… Một tệp tin zone chỉ được phép chứa một mẩu tin SOA và phải nằm ở vị trí đầu tiên trước các mẩu tin khác.
+- **A record** : dùng để phân giải tên miền địa chỉ ipv4.
 
-- **NS record** : Là bản ghi chỉ tới IP của Authoriative Name Server, có thể có nhiều NS Record. Một tên miền thường có nhiều bản ghi NS chỉ đến nhiều Authoriative Name Server khác nhau nhằm mục đích dự phòng khi có sự cố xảy ra.
+- **AAAA record** : dùng để phân giải tên miền địa chỉ ipv6.
 
-- **A record** : Là DNS record đơn giản nhất và được dùng nhiều nhất dùng để trỏ tên miền tới một địa chỉ IPv4 cụ thể.
+- **CNAME record** : dùng để phân giải tên miền phụ thành tên miền đích
 
-- **AAAA record** : Cũng giống như bản ghi A dùng để ánh xạ một tên miền tới một địa chỉ, nhưng khác với bản ghi A trỏ tới địa chỉ IPv4 thì bản ghi AAAA sẽ trỏ tới địa chỉ IPv6.
+- **NS record** : Có chức năng chỉ ra địa chỉ DNS server
 
-- **PTR Record** : Là bản ghi ngược lại hoàn toàn với A Record, bản ghi này map từ IP sang tên domain.
+- **MX record** : có chức năng chỉ ra địa chỉ mail server.
 
-- **CNAME record** : Là bản ghi tạo một bí danh (alias) cho một tên miền cụ thể, để điều hướng một domain tới một domain khác, vì thế nó có value luôn là tên một domain chứ không phải IP.
+- **PTR Record** : dùng để phân giải địa chỉ ip sang tên miền.
 
-- **SRV record** : Là bản ghi chứa thông tin về host và port của các dịch vụ như là VoIP, instant messaging,...
+- **SRV record** : dùng để xác định vị trí của các dịch vụ đặc biệt trong đường mạng 
 
-- **MX record** : Là bản ghi sử dụng để trỏ tên miền đến mail server. MX Record chỉ định server nào quản lý các dịch vụ Email của tên miền đó.
-
-- **TXT Record** : Là bản ghi chứa thông tin mà con người có thể đọc hiểu được về một domain, có thể có nhiều TXT Record cho một domain.
+- **TXT Record** : chứa các dữ liệu theo định dạng văn bản thường dùng để xác thực nguời sử dụng tên miền.
 
 ## Khái niệm DHCP
 
