@@ -2728,11 +2728,11 @@ Là máy chủ chứa toàn bộ thông tin về tên miền mà nó quản lý 
 
 - **NS record** : Có chức năng chỉ ra địa chỉ DNS server
 
-- **MX record** : có chức năng chỉ ra địa chỉ mail server.
+- **MX record** : có chức năng chỉ ra địa chỉ email server.
 
 - **PTR Record** : dùng để phân giải địa chỉ ip sang tên miền.
 
-- **SRV record** : dùng để xác định vị trí của các dịch vụ đặc biệt trong đường mạng 
+- **SRV record** : dùng để xác định vị trí của các dịch vụ đặc biệt trong đường mạng bằng cách cung cấp thông tin về máy chủ, cổng và ưu tiên cho mỗi dịch vụ.
 
 - **TXT Record** : chứa các dữ liệu theo định dạng văn bản thường dùng để xác thực nguời sử dụng tên miền.
 
