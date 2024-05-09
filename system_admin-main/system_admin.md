@@ -2696,19 +2696,21 @@ Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP củ
 
 #### Recursor nameserver
 
-Khi người dùng thực hiện truy vấn đến 1 tên miền, đầu tiên nó sẽ đi đến server DNS Recursor. Khi nhận được truy vấn, server DNS Recursor sẽ trả lại cho người dùng kết quả của truy vấn trong bộ nhớ đệm của nó (nếu có) hoặc nó sẽ giúp người dùng gửi các truy vấn đến Root nameserver, TLD nameserver và Authoritative nameserver để lấy kết quả, sau đó nó sẽ trả lời cho người dùng kết quả nó nhận được. Sau quá trình truy vấn, DNS Recursor sẽ lưu lại kết quả trong bộ nhớ đệm, và khi có người dùng khác truy vấn lại đến tên miền đó, nó sẽ có thể trả lại kết quả ngay mà không cần phải thực hiện lại quá trình truy vấn.
+Là server đóng vai trò liên lạc với các server khác để thay nó làm nhiệm vụ phản hồi cho client (trình duyệt người dùng)
 
 #### Root nameserver
 
-Là nameserver nằm trên đỉnh của hệ thống phân cấp DNS và trên thế giới có khoảng 12 DNS Root Nameserver. Nó sẽ chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver. Khi có truy vấn được gửi đến nó, root nameserver sẽ trả lại thông tin của TLD Nameserver để client tiếp tục truy vấn kết quả.
+Là server quan trọng nhất trong hệ thống cấp bậc của DNS. Nó như là một thư viện để định hướng tìm kiếm giúp bạn. Trên thế giới có khoảng 12 DNS Root Nameserver. 
+
+Nó sẽ chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver.
 
 #### TLD (Top Level Domain) Nameserver
 
-Là nameserver chứa toàn bộ thông tin về mọi tên miền cùng chung phần mở rộng tên miền như .com, .vn, .net,… Khi nhận được truy vấn, TLD nameserver sẽ trả lại cho client thông tin của Authoritative Nameserver quản lý tên miền đang được truy vấn.
+Là nó chịu trách nhiệm quản lý toàn bộ thông tin của một phần mở rộng tên miền chung như (.com, .vn, .net,…').
 
 #### Authoritative Nameserver
 
-Là máy chủ chứa toàn bộ thông tin về tên miền mà nó quản lý . Tại đây , việc phân giải tên miền diễn ra. Nó sẽ đưa cho Recursor nameserver địa chỉ IP cần thiết tìm thấy trong danh mục các bản ghi của nó.
+Là một máy chủ DNS chứa thông tin chính xác về một tên miền cụ thể. Nó sẽ trả lại cho Recursor nameserver địa chỉ IP cần thiết tìm thấy trong danh mục các bản ghi của nó.
 
 ### Các loại Query trong DNS
 
