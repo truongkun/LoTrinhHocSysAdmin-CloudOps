@@ -49,15 +49,6 @@ Cơ chế hoạt động của DNS (Domain Name System) được thực hiện 1
 - `Truy vấn Iterative:` Nếu DNS Server không có địa chỉ IP, nó sẽ trả về Authoritative Name Server hoặc TLD Name Server và quá trình này sẽ lặp đi lặp lại cho đến khi có kết quả hoặc đạt đến giới hạn thời gian.
 >
 - `Truy vấn Non-Recursive:` DNS client yêu cầu máy chủ DNS cho một bản ghi cụ thể mà máy chủ đã lưu trữ trong bộ nhớ cache của mình, giúp giảm tải cho hệ thống DNS bằng cách tránh việc truy cập lại Internet để lấy thông tin.
-### Các loại Query trong DNS
-
-- **Recursive query**: Là truy vấn mà DNS Server sẽ phải đưa ra câu trả lời đầy đủ cho truy vấn đó hoặc đưa ra thông báo lỗi. 
-   - Tức là với truy vấn này, DNS Server sẽ chịu trách nhiệm đi truy vấn hộ người dùng và lấy kết quả, sau đó trả lại kết quả cho người dùng.
-
-- **Iterative query**: Là truy vấn mà DNS Server có thể cung cấp câu trả lời hoặc 1 phần câu trả lời cho clients (hoặc đưa ra thông báo lỗi). 
-   - Với truy vấn này, nếu DNS Server có câu trả lời cho truy vấn trong bộ nhớ đệm của nó, nó sẽ trả lại kết quả cho người dùng, nếu không, nó sẽ trả lại lời giới thiệu đến DNS Server biết được câu trả lời của truy vấn, để người dùng tự truy vấn.
-
-- **Non-recursive query**: Thông thường điều này sẽ xảy ra khi DNS resolver client truy vấn máy chủ DNS một record mà server có quyền truy cập hoặc bản ghi tồn tại bên trong bộ đệm của server. Thông thường, một máy chủ DNS sẽ lưu các bản ghi DNS để ngăn chặn việc tiêu thụ thêm băng thông và giảm tải cho các máy chủ DNS khác.
 
 ### Các DNS Record thường dùng
 

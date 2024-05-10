@@ -6,7 +6,9 @@ Shell là môi trường mà chúng ta có thể chạy các lệnh, chương tr
 
 ### Các loại Shell
 
-Trong Unix gồm có hai loại shell chính là Bourne shell và C shell. Bourne shell có dấu nhắc lệnh mặc định là ký tự “$”. Còn C shell sẽ có ký tự là “%”
+Trong Unix gồm có hai loại shell chính là Bourne shell và C shell. 
+- Bourne shell có dấu nhắc lệnh mặc định là ký tự “$”. 
+- C shell sẽ có ký tự là “%”
 
 Bourne shell có các danh mục phụ bao gồm:
 
@@ -2261,7 +2263,7 @@ Trong đó :
 Group là tập hợp của nhiều user. Mỗi group có 1 tên duy nhất và 1 mã định danh duy nhất ( gid ). Khi tạo ra 1 user ( không dùng option -g ) thì mặc định 1 group mang tên user được tạo ra .
 
 ### Các lệnh quản lý User
-
+sud
 Lệnh tạo group mới :
 
 ```
@@ -2678,19 +2680,16 @@ Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP củ
 
 ### Cách thức hoạt động của DNS
 
-Để giải thích cơ chế hoạt động của DNS, chúng ta sẽ tìm hiểu quy trình khi một máy tính cá nhân (client) muốn truy cập vào địa chỉ example.vn, cụ thể như sau:
-
-- **Bước 1** : Máy client của người dùng sẽ gửi truy vấn về tên miền example.vn tới máy chủ quản lý tên miền (name server) cục bộ để tìm ra IP của example.vn
-
-- **Bước 2** : Local Nameserver này sẽ tiến hành rà soát trong cơ sở dữ liệu của nó xem có thông tin về tên miền example.vn ứng với IP nào hay không. Nếu có, nó sẽ trả ngay lại IP của example.vn cho client. Nếu không, nó sẽ gửi truy vấn tới ROOT Name Server.
-
-- **Bước 3** : Tuy nhiên, Root Name Server không có chứa dữ liệu về tên miền cũng như IP, mà nó chỉ có dữ liệu về máy chủ quản lý tên miền đó (.vn). Nên Root Name Server sẽ gửi thông tin về địa chỉ máy chủ quản lý các tên miền .VN về cho máy chủ tên miền cục bộ.
-
-- **Bước 4** : Tiếp theo, Máy chủ tên miền cục bộ lại gửi yêu cầu đến máy chủ quản lý tên miền .vn để tìm example.vn.
-
-- **Bước 5** : Vì máy chủ quản lý tên miền VN có chứa CSDL của tất cả tên miền .vn nên nó sẽ trả lại địa chỉ IP của tên miền example.vn cho máy chủ tên miền cục bộ.
-
-- **Bước 6** : Máy chủ tên miền cục bộ sẽ gửi thông tin này đến máy client, máy client tiếp tục sử dụng ip vừa được cung cấp để truy cập tới server của example.vn.
+1. Client truy vấn tên miền "facebook.com".
+2. Hệ thống điều hành kiểm tra cache local xem có thông tin về "facebook.com" không. Nếu có, trả lại địa chỉ IP cho client.
+3. Nếu không có trong cache local, Recursor Nameserver được gọi và kiểm tra cache của mình.
+4. Nếu Recursor Nameserver không có thông tin trong cache, nó gửi truy vấn đến Root Nameserver.
+5. Root Nameserver giới thiệu Recursor Nameserver về TLD Nameserver cho miền ".com".
+6. Recursor Nameserver gửi truy vấn đến TLD Nameserver ".com".
+7. TLD Nameserver ".com" giới thiệu Recursor Nameserver về Authoritative Nameserver cho "facebook.com".
+8. Recursor Nameserver gửi truy vấn đến Authoritative Nameserver.
+9. Authoritative Nameserver trả lời với địa chỉ IP của "facebook.com".
+10. Recursor Nameserver lưu trữ thông tin này trong cache và trả lại địa chỉ IP cho client.
 
 ### Các loại DNS Server
 
