@@ -1266,7 +1266,7 @@ systemctl enable reboot_message.service
 
 ## Tổng quan về filesystem
 
-File System hay hệ thống tệp là phương pháp cấu trúc dữ liệu mà các hệ điều hành sử dụng để quản lý,tổ chức và lưu trữ dữ liệu,các tệp tin trên ổ đĩa
+File system là cách mà hệ điều hành tổ chức và quản lý dữ liệu trong các tập tin trên ổ đĩa hoặc bất kỳ phương tiện lưu trữ nào
 
 ### Các loại filesystem phổ biến
 
@@ -1282,7 +1282,7 @@ File System hay hệ thống tệp là phương pháp cấu trúc dữ liệu m�
 - Ext2 không sử dụng **_journal_** cho nên sẽ có ít dữ liệu được ghi vào ổ đĩa hơn .
 - Hỗ trợ partition size lên đến `2-32TiB`
 - Hỗ trợ file size lên đến `16GiB-2TiB`
-- Có thể chứa tối đa 10<sup>18</sup> file trong 1 volume .
+- Có thể chứa tối đa 10<sup>18</sup> file trong 1 volume 
 - Độ dài tên file tối đa là `255` kí tự .
 
 #### ext3
@@ -1378,11 +1378,12 @@ Một số option thường được sử dụng :
 
 ### So sánh du vs df
 
-Lệnh df đưa ra tóm tắt đầy đủ về việc sử dụng không gian đĩa cứng đã được sử dụng và còn sẵn của hệ thông tập tin trên Linux. Lệnh du thì tập trung vào việc ước tính không gian đĩa cứng được sử dụng của từng thư mục hoặc tệp tiêng lẻ.
+- Lệnh df đưa ra tóm tắt đầy đủ về việc sử dụng không gian đĩa cứng đã được sử dụng và còn sẵn của hệ thông tập tin trên Linux. 
+- Lệnh du thì tập trung vào việc ước tính không gian đĩa cứng được sử dụng của từng thư mục hoặc tệp tiêng lẻ.
 
 ## Tổng quan về lệnh mkfs
 
-Lệnh mkfs là một lệnh trong hệ điều hành Linux được sử dụng để tạo hệ thống tệp (filesystem) trên một thiết bị lưu trữ như ổ cứng, ổ đĩa USB, hoặc phân vùng. Cụ thể, mkfs được sử dụng để định dạng (format) thiết bị để tạo ra các cấu trúc dữ liệu cần thiết để lưu trữ các tệp và thư mục trên đó.
+Lệnh mkfs sử dụng để tạo hệ thống tệp (filesystem) trên một thiết bị lưu trữ như ổ cứng, ổ đĩa USB, hoặc phân vùng. Cụ thể, mkfs được sử dụng để định dạng (format) thiết bị để tạo ra các cấu trúc dữ liệu cần thiết để lưu trữ các tệp và thư mục trên đó.
 
 ### Cú pháp
 
@@ -1442,6 +1443,12 @@ Khi ta thực hiện mount kiểu này xong thì mỗi lần ta reboot ta không
 Để có thể mout tự động thì ta cần phải vào file `/etc/fstab` để thêm thiết bị cần mount vào file này. Sau khi máy khởi động nó sẽ tự động đọc file này và mount những gì được ghi ở trong file.
 
 Cấu trúc file `/etc/fstab` :
+
+```
+  VD: /dev/sda1   /mnt/data   ext4    defaults    0   2
+```
+or 
+
 ![](https://linuxhint.com/wp-content/uploads/2022/12/Introduction-to-the-Linux-4.png)
 
 Trong đó :
@@ -2695,21 +2702,23 @@ Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP củ
 
 #### Recursor nameserver
 
-Là server đóng vai trò liên lạc với các server khác để thay nó làm nhiệm vụ phản hồi cho client (trình duyệt người dùng)
+- Là một máy chủ có nhiệm vụ chuyển đổi tên miền thành địa chỉ IP. Được hoạt động như một thư viện, lưu trữ thông tin về địa chỉ IP của các trang web và ứng dụng.
+
+- Là server đóng vai trò liên lạc với các server khác để thay nó làm nhiệm vụ phản hồi cho client (trình duyệt người dùng)
 
 #### Root nameserver
 
-Là server quan trọng nhất trong hệ thống cấp bậc của DNS. Nó như là một thư viện để định hướng tìm kiếm giúp bạn. Trên thế giới có khoảng 12 DNS Root Nameserver. 
+- Là server quan trọng nhất trong hệ thống cấp bậc của DNS. Nó như là một thư viện để định hướng tìm kiếm giúp bạn. Trên thế giới có khoảng 12 DNS Root Nameserver. 
 
-Nó sẽ chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver.
+- Nó sẽ chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver.
 
 #### TLD (Top Level Domain) Nameserver
 
-Là nó chịu trách nhiệm quản lý toàn bộ thông tin của một phần mở rộng tên miền chung như (.com, .vn, .net,…').
+- Là nó chịu trách nhiệm quản lý toàn bộ thông tin của một phần mở rộng tên miền chung như (.com, .vn, .net,…').
 
 #### Authoritative Nameserver
 
-Là một máy chủ DNS chứa thông tin chính xác về một tên miền cụ thể. Nó sẽ trả lại cho Recursor nameserver địa chỉ IP cần thiết tìm thấy trong danh mục các bản ghi của nó.
+- Là một máy chủ DNS chứa thông tin chính xác về một tên miền cụ thể. Nó sẽ trả lại cho Recursor nameserver địa chỉ IP cần thiết tìm thấy trong danh mục các bản ghi của nó.
 
 ### Các loại Query trong DNS
 
