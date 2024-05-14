@@ -2698,6 +2698,15 @@ Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP củ
 9. Authoritative Nameserver trả lời với địa chỉ IP của "facebook.com".
 10. Recursor Nameserver lưu trữ thông tin này trong cache và trả lại địa chỉ IP cho client.
 
+Client(ktra Cache)
+Recursor nameserver
+Root nameserver
+TLD nameserver(.com)
+Resolver
+Authoritative nameserver(cấp ip) -> Recursive(nhận ip)
+Recursor nameserver(trả ip lưu cache)
+Client(nhận ip)
+
 ### Các loại DNS Server
 
 #### Recursor nameserver
@@ -2758,7 +2767,7 @@ DHCP giao tiếp bằng UDP và sử dụng port 67 và 68. DHCP server sử d�
 
 - **DHCP Discover** : Đây là gói tin yêu cầu cấp phát địa chỉ IP để truy cập mạng của DHCP client gửi đến DHCP server.
 
-- **DHCP Offer** : Đây là gói tin phản hồi của DHCP Server gửi cho client sau khi nhận được gói DISCOVER. Gói tin này chứa địa chỉ IP và các thông tin cấu hình TCP/IP bổ sung.
+- **DHCP Offer** : Đây là gói tin phản hồi của DHCP Server gửi cho client sau khi nhận được gói DISCOVER. Gói tin này chứa địa chỉ IP, subnet mask, default gateway và thời gian thuê.
 
 - **DHCP Request** : Đây là gói tin Client gửi cho DHCP server về việc đã nhận được thông tin địa chỉ IP trong gói DHCP Offer.
 

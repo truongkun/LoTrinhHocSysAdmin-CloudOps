@@ -96,3 +96,12 @@ sudo netplan apply
 ```
 
 Sau khi thực hiện các bước này, giao diện mạng sẽ cấu hình để nhận IP động từ máy chủ DHCP trong mạng của bạn. Bạn cũng có thể sử dụng lệnh `ip addr show` để kiểm tra xem IP đã được cấu hình thành công cho giao diện mạng hay chưa.
+
+
+**khi nào dùng ip động khi nào dùng ip tĩnh**
+
+- IP Tĩnh: Dành cho các thiết bị cần truy cập từ nhiều nguồn khác nhau, cung cấp dịch vụ hoặc cần địa chỉ IP cố định để hoạt động ổn định 
+
+- Ip Động: Dành cho các thiết bị người dùng cuối, thiết bị di động, hoặc các thiết bị không cần truy cập từ xa hoặc không cần địa chỉ IP cố định (máy tính cá nhân, điện thoại thông minh, máy tính bảng).
+
+-> Đặt Ip tĩnh khi nó được dùng truy cập từ nhiều nguồn khác đến, còn lại ip động

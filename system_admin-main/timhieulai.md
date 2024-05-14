@@ -214,11 +214,11 @@ DHCP client gửi gói tin DHCP Discovery tới địa chỉ broadcast 255.255.2
 
 ### DHCP Offer
 
-Khi DHCP server nhận được DHCP Discovery , nó sẽ đưa ra đề xuất một Ip address có trong Ip address pool của nó bằng cách gửi DHCP Offer tới DHCP Client. Trong gói tin này chứa IP address, Subnet mask, Default gateway, DNS address, thông tin về lease
+Khi DHCP server nhận được DHCP Discovery , nó sẽ đưa ra đề xuất một Ip address có trong Ip address pool của nó bằng cách gửi gói tin DHCP Offer tới DHCP Client thông qua địa chỉ Mac cảu client. Trong gói tin này chứa IP address, Subnet mask, Default gateway, DNS address, thông tin về lease
 
 ### DHCP Request
 
-Một DHCP client có thể nhận nhiều DHCP Offer, tuy nhiên chỉ có thể chấp nhận 1 Offer duy nhất. Để phản hồi lại Offer, DHCP client gửi DHCP Request tới địa chỉ của DHCP Server được chấp nhận
+Một DHCP client có thể nhận nhiều DHCP Offer, tuy nhiên chỉ có thể chấp nhận 1 Offer duy nhất (thường là đề xuất đầu tiên nhận được). Để phản hồi lại Offer, DHCP client gửi DHCP Request tới địa chỉ của DHCP Server được chấp nhận.
 
 ### DHCP Acknowledgment
 
