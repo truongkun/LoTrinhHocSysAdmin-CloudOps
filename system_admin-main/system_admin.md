@@ -1622,7 +1622,7 @@ RAID 5 – sử dụng cả kỹ thuật phân stripe và parity. Cung cấp c�
 
 Giả sử có 8 đoạn dữ liệu và 3 ổ đĩa: Đoạn dữ liệu số 1 và số 2 sẽ được ghi vào ổ đĩa 1 và 2 riêng rẽ, đoạn sao lưu của chúng được ghi vào ổ cứng 3. Đoạn số 3 và 4 được ghi vào ổ 1 và 3 với đoạn sao lưu tương ứng ghi vào ổ đĩa 2. Đoạn số 5, 6 ghi vào ổ đĩa 2 và 3, còn đoạn sao lưu được ghi vào ổ đĩa 1 và sau đó trình tự này lặp lại, đoạn số 7,8 được ghi vào ổ 1, 2 và đoạn sao lưu ghi vào ổ 3 như ban đầu.
 
-Dung lượng cuối cùng RAID 5 được tính: (Dung lượng 1 ổ cứng) x [(Số lượng ổ cứng tham gia) – 1
+Dung lượng cuối cùng RAID 5 được tính: (Dung lượng 1 ổ cứng) x [(Số lượng ổ cứng tham gia) – 1]
 
 Tổng quan :
 
@@ -2679,11 +2679,13 @@ _**Chú thích**_ :
 
 - **DNS1** : thông tin DNS server.
 
-## DNS là gì ?
+# DNS là gì ?
 
-DNS (tên tiếng anh: Domain Name System, dịch là hệ thống phân giải tên miền), là một hệ thống cho phép thiết lập tương ứng giữa địa chỉ IP và tên miền trên Internet. Hệ thống này được ra đời vào năm 1984.
+DNS (tên tiếng anh: Domain Name System, dịch là hệ thống phân giải tên miền), là một hệ thống cho phép thiết lập tương ứng giữa địa chỉ IP và tên miền trên Internet.
 
-Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP của website mà bạn muốn dễ dàng và nhanh chóng hơn. Hiểu đơn giản, DNS giống như danh bạ điện thoại, trong đó, địa chỉ IP tương ứng với số điện thoại còn tên miền của website tương ứng với tên chủ nhân số điện thoại đó.
+## Tại sao cần có dns?
+
+- DNS giúp con người phân giải tên miền sang ip. Giúp con người không phải nhớ những địa chỉ ip khó nhớ  
 
 ### Cách thức hoạt động của DNS
 
@@ -2698,14 +2700,6 @@ Hệ thống phân giải tên miền giúp truy cập vào địa chỉ IP củ
 9. Authoritative Nameserver trả lời với địa chỉ IP của "facebook.com".
 10. Recursor Nameserver lưu trữ thông tin này trong cache và trả lại địa chỉ IP cho client.
 
-Client(ktra Cache)
-Recursor nameserver
-Root nameserver
-TLD nameserver(.com)
-Resolver
-Authoritative nameserver(cấp ip) -> Recursive(nhận ip)
-Recursor nameserver(trả ip lưu cache)
-Client(nhận ip)
 
 ### Các loại DNS Server
 
@@ -2717,7 +2711,9 @@ Client(nhận ip)
 
 #### Root nameserver
 
-- Là server quan trọng nhất trong hệ thống cấp bậc của DNS. Nó như là một thư viện để định hướng tìm kiếm giúp bạn. Trên thế giới có khoảng 12 DNS Root Nameserver. 
+- Là server quan trọng nhất trong hệ thống cấp bậc của DNS. Nó chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver. Trên thế giới có khoảng 12 DNS Root Nameserver.
+
+-> Khi có truy vấn được gửi đến nó, root nameserver sẽ trả lại thông tin của TLD Nameserver để client tiếp tục truy vấn kết quả.
 
 - Nó sẽ chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver.
 
