@@ -1,69 +1,75 @@
-# DNS là gì?
+# DNS
 
-- DNS, viết tắt của “Domain Name System”, là hệ thống quản lý và dịch tên miền (hostname) thành địa chỉ IP để truy cập các trang web trên internet. 
->
-## Chức năng của Domain Name System
+## DNS là gì?
 
-- Domain name system cũng giống như một cuốn danh bạ điện thoại. Nghĩa là thay vì phải nhớ hàng tá số điện thoại với một đống con số, thì bạn chỉ cần nhớ tên của chủ nhân số điện thoại thôi. Tương ứng với ví dụ này, số điện thoại sẽ là địa chỉ IP của Website, còn tên chủ nhân chính là tên miền của website đó.
+- DNS là hệ thống phân giải tên miền. 
+- DNS là hệ thống cho phép thiết lập tương ứng giữa địa chỉ ip và tên miền trên internet.
 
-## Cơ chế hoạt động của DNS
+## DNS dùng để  làm gì?
 
-Cơ chế hoạt động của DNS (Domain Name System) được thực hiện 1 truy vấn như sau:
+- DNS dùng để dịch các tên miền dễ nhớ của con người (như www.example.com) thành các địa chỉ IP mà máy tính sử dụng để định vị và giao tiếp với nhau trên mạng (như 192.0.2.1).
 
-1. **Recursor Nameserver**: (trung gian)
-   - Khi một máy tính hoặc thiết bị kết nối với internet cần phải truy vấn một địa chỉ IP cho một tên miền như "example.com", nó sẽ gửi yêu cầu này đến Recursor Nameserver.
-   - Recursor Nameserver sẽ kiểm tra trong bộ nhớ cache của nó xem nó đã lưu trữ thông tin cho tên miền này trước đó hay không. Nếu có, nó sẽ trả về địa chỉ IP từ cache.
-   - Nếu thông tin không được tìm thấy trong cache, Recursor Nameserver sẽ bắt đầu quá trình tìm kiếm bằng cách gửi yêu cầu truy vấn đến các máy chủ DNS khác để tìm ra địa chỉ IP phù hợp.
+## Các loại DNS server?
 
-2. **Root NameServer**:
-   - Nếu Recursor Nameserver không tìm thấy thông tin trong cache của mình, nó sẽ gửi yêu cầu truy vấn đến một trong 13 máy chủ Root NameServer trên toàn cầu.
-   - Root NameServer sẽ trả lời với thông tin về TLD (Top-Level-Domain) NameServer phù hợp dựa trên phần mở rộng của tên miền được truy vấn. 
-   - Ví dụ, nếu tên miền là "example.com", Root NameServer sẽ trả lại thông tin về máy chủ TLD cho miền ".com".
+**DNS Recursor** là máy chủ chịu trách nhiệm truy vấn đệ quy. Được hoạt động như 1 thư viện, lưu trữ thông tin về địa chỉ IP của trang web và ứng dụng. 
+- Khi người dùng nhập 1 tên miền, DNS recursor sẽ tìm kiếm thông tin đó trong bộ nhớ cache của mình.
 
-3. **Top-Level-Domain NameServer**:
-   - Recursor Nameserver sau đó gửi yêu cầu truy vấn tiếp theo đến máy chủ TLD NameServer cho phần mở rộng của tên miền (ví dụ: .com).
-   - TLD NameServer sẽ trả lại thông tin về máy chủ Authoritative NameServer cho tên miền được truy vấn, chẳng hạn như "example.com".
+**Root nameserver** là dịch vụ phân giải tên miền gốc và trên thế giới có khoảng 13 DNS root server.
 
-4. **Authoritative NameServer**:
-   - Cuối cùng, Recursor Nameserver gửi yêu cầu truy vấn cuối cùng đến máy chủ Authoritative NameServer cho tên miền cụ thể.
-   - Authoritative NameServer sẽ trả về địa chỉ IP chính xác của tên miền "example.com".
-   - Recursor Nameserver lưu trữ thông tin này trong bộ nhớ cache của mình để sử dụng cho các truy vấn tương lai và cung cấp địa chỉ IP cho client gửi yêu cầu ban đầu.
+- `Root nameserver :` chứa toàn bộ các thông tin về domain và IP của các Top Level Domain (TLD) Nameserver. 
 
-## Các loại máy chủ DNS server   
+- Khi có truy vấn được gửi đến nó, root nameserver sẽ trả lại thông tin của TLD Nameserver để client tiếp tục truy vấn kết quả
 
-- `Recursor Nameserver` là một máy chủ có nhiệm vụ chuyển đổi tên miền thành địa chỉ IP. Được hoạt động như một thư viện, lưu trữ thông tin về địa chỉ IP của các trang web và ứng dụng. 
-    
-- `Root NameServer:` là dịch vụ phân giải tên miền gốc. Trên thế giới có tất cả 12 DNS root Server. 
-  - `DNS root Server` quản lý tất cả các tên miền Top-level. Nó chứa tất cả thông tin về domain và ip của các Top-level-domain nameserver.
-    ![alt text](/Linux/img/dns-root-server.png)
-  - `VD:` Khi truy vấn đến Root NameServer, Root Nameserver sẽ trả lại thông tin TLD Nameserver để client tiếp tục truy vấn kết quả.
-- `Top-Level-Domain NameServer:` là máy chủ tên miền cấp cao nhất, chịu trách nhiệm lưu trữ thông tin về các tên miền có phần mở rộng chung (gTLD), chẳng hạn như .com, .org, .net.
-    - VD: Khi nhận đc truy vấn, TLD Nameserver sẽ trả lại cho client thông tin Authoritative Nameserver nơi quản lý tên miền đang được truy vấn 
-- `Authoritative NameServer:` là nơi lưu trữ thông tin về tên miền và địa chỉ IP mà nó quản lý. Là điểm cuối của quá trình truy vấn và phân giải địa chỉ IP cần thiết cho Recursor Nameserver.
+**Top-level-domain nameserver**  
 
-![alt text](img/dns2.png)
+- Là nameserver chứa toàn bộ thông tin về mọi tên miền cùng chung phần mở rộng tên miền như .com, .vn, .net,…  
 
-## Các loại truy vấn DNS
-- `Truy vấn Recursive:` DNS client yêu cầu máy chủ DNS trả về kết quả hoặc thông báo lỗi nếu không tìm thấy bản ghi tài nguyên.
->
-- `Truy vấn Iterative:` Nếu DNS Server không có địa chỉ IP, nó sẽ trả về Authoritative Name Server hoặc TLD Name Server và quá trình này sẽ lặp đi lặp lại cho đến khi có kết quả hoặc đạt đến giới hạn thời gian.
->
-- `Truy vấn Non-Recursive:` DNS client yêu cầu máy chủ DNS cho một bản ghi cụ thể mà máy chủ đã lưu trữ trong bộ nhớ cache của mình, giúp giảm tải cho hệ thống DNS bằng cách tránh việc truy cập lại Internet để lấy thông tin.
+- Khi nhận được truy vấn, TLD nameserver sẽ trả lại cho client thông tin của Authoritative Nameserver quản lý tên miền đang được truy vấn.
 
-### Các DNS Record thường dùng
+**Autheratitive** Authoritative Name Server lưu trữ thông tin về tên miền và địa chỉ IP tương ứng. Là điểm cuối của quá trình truy vấn và phân giải địa chỉ IP cần thiết cho DNS Recursor.
 
-- **A record** : dùng để phân giải tên miền địa chỉ ipv4.
+## Quá trình hoạt động DNS server
 
-- **AAAA record** : dùng để phân giải tên miền địa chỉ ipv6.
+Quá trình phân giải tên miền (DNS resolution) cho tên miền facebook.com bao gồm các bước sau đây:
 
-- **CNAME record** : dùng để phân giải tên miền phụ thành tên miền đích
+### 1. Trình duyệt kiểm tra bộ nhớ đệm cục bộ (Local Cache)
+Trước khi gửi yêu cầu ra mạng, trình duyệt sẽ kiểm tra bộ nhớ đệm (cache) của chính nó để xem liệu tên miền facebook.com đã được phân giải gần đây và lưu trữ trong bộ nhớ đệm hay không. Nếu tìm thấy, quá trình phân giải tên miền kết thúc tại đây.
 
-- **NS record** : Có chức năng chỉ ra địa chỉ DNS server
+### 2. Hệ điều hành kiểm tra bộ nhớ đệm cục bộ
+Nếu trình duyệt không tìm thấy tên miền trong bộ nhớ đệm của nó, nó sẽ yêu cầu hệ điều hành (OS) kiểm tra bộ nhớ đệm DNS của hệ điều hành. Nếu hệ điều hành có bản ghi DNS tương ứng trong bộ nhớ đệm của nó, quá trình phân giải tên miền kết thúc tại đây.
 
-- **MX record** : có chức năng chỉ ra địa chỉ mail server. MX Record chỉ định server nào quản lý các dịch vụ Email của tên miền đó.
+### 3. Trình phân giải DNS (DNS Resolver) của nhà cung cấp dịch vụ Internet (ISP)
+Nếu hệ điều hành không có bản ghi DNS trong bộ nhớ đệm, nó sẽ gửi yêu cầu đến trình phân giải DNS của nhà cung cấp dịch vụ Internet (ISP). Trình phân giải DNS này sẽ kiểm tra bộ nhớ đệm của nó trước khi thực hiện các bước tiếp theo.
 
-- **PTR Record** : dùng để phân giải địa chỉ ip sang tên miền.
+### 4. Truy vấn tới máy chủ gốc (Root Server)
+Nếu trình phân giải DNS của ISP không tìm thấy bản ghi trong bộ nhớ đệm của nó, nó sẽ gửi truy vấn đến một trong các máy chủ gốc (Root Server). Máy chủ gốc sẽ không cung cấp câu trả lời cuối cùng nhưng sẽ hướng dẫn trình phân giải DNS tới máy chủ DNS cấp cao hơn (Top-Level Domain, TLD).
 
-- **SRV record** : dùng để xác định vị trí của các dịch vụ đặc biệt trong đường mạng 
+### 5. Truy vấn tới máy chủ TLD
+Máy chủ gốc sẽ trả về địa chỉ của máy chủ TLD quản lý tên miền cấp cao nhất của facebook.com, cụ thể là máy chủ TLD .com. Trình phân giải DNS của ISP sẽ tiếp tục gửi truy vấn đến máy chủ TLD .com.
 
-- **TXT Record** : chứa các dữ liệu theo định dạng văn bản thường dùng để xác thực nguời sử dụng tên miền.
+### 6. Truy vấn tới máy chủ DNS thẩm quyền (Authoritative DNS Server)
+Máy chủ TLD sẽ trả về địa chỉ của máy chủ DNS thẩm quyền cho tên miền facebook.com. Trình phân giải DNS của ISP sẽ gửi truy vấn đến máy chủ DNS thẩm quyền này.
+
+### 7. Nhận phản hồi từ máy chủ DNS thẩm quyền
+Máy chủ DNS thẩm quyền cho tên miền facebook.com sẽ trả về địa chỉ IP tương ứng với tên miền facebook.com. Đây là kết quả cuối cùng của quá trình phân giải tên miền.
+
+### 8. Trả kết quả về cho trình duyệt
+Trình phân giải DNS của ISP sẽ gửi địa chỉ IP này về cho hệ điều hành, hệ điều hành sẽ gửi lại cho trình duyệt. Trình duyệt nhận được địa chỉ IP và tiến hành kết nối tới máy chủ web của facebook.com bằng địa chỉ IP này.
+
+### Tổng kết quá trình:
+1. Trình duyệt kiểm tra bộ nhớ đệm.
+2. Hệ điều hành kiểm tra bộ nhớ đệm.
+3. Trình phân giải DNS của ISP kiểm tra bộ nhớ đệm.
+4. Truy vấn tới máy chủ gốc.
+5. Truy vấn tới máy chủ TLD .com.
+6. Truy vấn tới máy chủ DNS thẩm quyền cho facebook.com.
+7. Nhận địa chỉ IP từ máy chủ DNS thẩm quyền.
+8. Trả kết quả về cho trình duyệt.
+
+Thông qua quá trình này, tên miền facebook.com được phân giải thành địa chỉ IP, cho phép trình duyệt kết nối và hiển thị trang web.
+
+## 3 loại truy vấn DNS
+
+- Recursive query: DNS client yêu cầu máy chủ DNS (thường là recursive DNS resolver). Sẽ trả lời máy khách bằng bản ghi tài nguyên được yêu cầu. Hoặc thông báo lỗi nếu resolver không thể tìm thấy bản ghi.
+- Iterative query: Trong tình huống này, DNS client sẽ cho phép máy chủ DNS trả về câu trả lời tốt nhất có thể. Nếu máy chủ DNS được truy vấn không có kết quả trùng khớp với tên truy vấn. Nó sẽ trả về một giới thiệu đến máy chủ DNS có thẩm quyền cho mức thấp hơn. DNS client sau đó sẽ thực hiện một truy vấn đến địa chỉ được giới thiệu. Quá trình này tiếp tục với các máy chủ DNS bổ sung trong chuỗi truy vấn cho đến khi xảy ra lỗi hoặc hết thời gian.
+- Non-recursive query: Thông thường điều này sẽ xảy ra khi DNS resolver client truy vấn máy chủ DNS một record mà server có quyền truy cập hoặc bản ghi tồn tại bên trong bộ đệm của server. Thông thường, một máy chủ DNS sẽ lưu các bản ghi DNS để ngăn chặn việc tiêu thụ thêm băng thông và giảm tải cho các máy chủ DNS khác.
