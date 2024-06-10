@@ -98,10 +98,39 @@ sudo netplan apply
 Sau khi thực hiện các bước này, giao diện mạng sẽ cấu hình để nhận IP động từ máy chủ DHCP trong mạng của bạn. Bạn cũng có thể sử dụng lệnh `ip addr show` để kiểm tra xem IP đã được cấu hình thành công cho giao diện mạng hay chưa.
 
 
-**khi nào dùng ip động khi nào dùng ip tĩnh**
+# khi nào dùng ip động khi nào dùng ip tĩnh
 
 - IP Tĩnh: Dành cho các thiết bị cần truy cập từ nhiều nguồn khác nhau, cung cấp dịch vụ hoặc cần địa chỉ IP cố định để hoạt động ổn định 
 
 - Ip Động: Dành cho các thiết bị người dùng cuối, thiết bị di động, hoặc các thiết bị không cần truy cập từ xa hoặc không cần địa chỉ IP cố định (máy tính cá nhân, điện thoại thông minh, máy tính bảng).
 
 -> Đặt Ip tĩnh khi nó được dùng truy cập từ nhiều nguồn khác đến, còn lại ip động
+
+
+**Cấu hình IP tĩnh (Static IP):**
+
+- **Khi nào sử dụng:** 
+  - Các thiết bị cần địa chỉ IP cố định để dễ dàng quản lý, như máy chủ (server), máy in mạng, camera IP, hoặc các thiết bị yêu cầu truy cập từ xa thường xuyên.
+  - Các hệ thống mạng yêu cầu cấu hình địa chỉ IP cụ thể để hoạt động chính xác hoặc để tuân thủ các yêu cầu về bảo mật và quản lý mạng.
+  
+- **Ưu điểm:**
+  - Địa chỉ IP không thay đổi, dễ dàng quản lý và theo dõi thiết bị trong mạng.
+  - Tăng tính bảo mật và ổn định cho các dịch vụ yêu cầu địa chỉ IP cố định.
+  
+- **Nhược điểm:**
+  - Quản lý thủ công phức tạp, nhất là trong các mạng lớn.
+  - Khả năng xung đột IP nếu không quản lý tốt.
+
+**Cấu hình IP động (Dynamic IP):**
+
+- **Khi nào sử dụng:** 
+  - Mạng có nhiều thiết bị di động, như điện thoại, laptop, hoặc các thiết bị không yêu cầu địa chỉ IP cố định.
+  - Các hệ thống mạng có số lượng thiết bị lớn và yêu cầu tự động cấp phát địa chỉ IP để giảm thiểu công việc quản lý.
+  
+- **Ưu điểm:**
+  - Tự động cấp phát và quản lý địa chỉ IP qua DHCP, giảm thiểu công việc thủ công.
+  - Dễ dàng mở rộng mạng mà không cần cấu hình lại từng thiết bị.
+  
+- **Nhược điểm:**
+  - Địa chỉ IP thay đổi mỗi lần thiết bị kết nối lại, khó quản lý và theo dõi thiết bị cố định.
+  - Có thể gặp vấn đề với các dịch vụ yêu cầu địa chỉ IP cố định.

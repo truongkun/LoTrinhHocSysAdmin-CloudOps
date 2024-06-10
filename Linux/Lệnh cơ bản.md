@@ -206,18 +206,23 @@ chmod u=r file.txt
 - Sử dụng lệnh adduser hoặc useradd:
 
   ```
-  sudo adduser username
+  sudo adduser username  // ko có tk login
 
   or
 
-  sudo useradd username
+  sudo useradd username  // có tk login
   ```
   Thay username bằng tên của người dùng mới.
 
-- Để thêm người dùng vào một nhóm cụ thể, sử dụng lệnh usermod:
+- Để thêm người dùng vào group cụ thể, sử dụng lệnh usermod:
 
   ```
   sudo usermod -aG groupname username
+  ```
+
+- Để gỡ username ra khỏi group
+  ```
+  sudo gpasswd -d truongpv root
   ```
   Thay `groupname` bằng tên của nhóm và `username` bằng tên của người dùng.
 
@@ -226,11 +231,13 @@ chmod u=r file.txt
 - Sử dụng lệnh addgroup hoặc groupadd:
 
   ```
-  sudo addgroup groupname
-
+  sudo addgroup groupname  //nếu bạn đang sử dụng một hệ điều 
+                            hành dựa trên Debian và muốn có một lệnh 
+                            đơn giản và dễ sử dụng hơn.
   or
 
-  sudo groupadd groupname
+  sudo groupadd groupname  // khi bạn cần kiểm soát chi tiết hơn về 
+                            các thiết lập nhóm.
   ```
   Thay groupname bằng tên của nhóm mới.
 
@@ -259,11 +266,11 @@ chmod u=r file.txt
 - Để xóa người dùng hoặc nhóm, bạn có thể sử dụng lệnh deluser hoặc userdel để người dùng và delgroup hoặc groupdel để nhóm.
 
   ```
-  sudo deluser username
+  sudo deluser username  // xóa username
 
   or
 
-  sudo delgroup groupname
+  sudo delgroup groupname  // xóa groupname
   ```
 
 

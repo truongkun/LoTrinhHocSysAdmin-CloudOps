@@ -108,7 +108,8 @@ Ví dụ : Hệ thống chạy CPU có 4 core, có average nhỏ hơn 4 nghĩa l
 
 ## kill vs kill -9
 
-với kill, nó sẽ đợi tiến trình giải phóng bộ nhớ, xử lý tiến trình con, ... tuy nghiên nó có thể từ chối dừng tiến trình còn lệnh kill -9 buộc tiến trình dừng luôn, nó không quan tâm tiến trình con chạy hay không.
+- với kill, nó sẽ đợi tiến trình giải phóng bộ nhớ, xử lý tiến trình con, ... tuy nghiên nó có thể từ chối dừng tiến trình 
+- lệnh kill -9 buộc tiến trình dừng luôn, nó không quan tâm tiến trình con chạy hay không.
 
 ## Mount tự động bằng fstab
 

@@ -2,8 +2,7 @@
 
 ## DNS là gì?
 
-- DNS là hệ thống phân giải tên miền. 
-- DNS là hệ thống cho phép thiết lập tương ứng giữa địa chỉ ip và tên miền trên internet.
+- DNS là hệ thống phân giải tên miền từ tên miền sang ip và ngược lại.
 
 ## DNS dùng để  làm gì?
 
@@ -70,6 +69,21 @@ Thông qua quá trình này, tên miền facebook.com được phân giải thà
 
 ## 3 loại truy vấn DNS
 
-- Recursive query: DNS client yêu cầu máy chủ DNS (thường là recursive DNS resolver). Sẽ trả lời máy khách bằng bản ghi tài nguyên được yêu cầu. Hoặc thông báo lỗi nếu resolver không thể tìm thấy bản ghi.
-- Iterative query: Trong tình huống này, DNS client sẽ cho phép máy chủ DNS trả về câu trả lời tốt nhất có thể. Nếu máy chủ DNS được truy vấn không có kết quả trùng khớp với tên truy vấn. Nó sẽ trả về một giới thiệu đến máy chủ DNS có thẩm quyền cho mức thấp hơn. DNS client sau đó sẽ thực hiện một truy vấn đến địa chỉ được giới thiệu. Quá trình này tiếp tục với các máy chủ DNS bổ sung trong chuỗi truy vấn cho đến khi xảy ra lỗi hoặc hết thời gian.
-- Non-recursive query: Thông thường điều này sẽ xảy ra khi DNS resolver client truy vấn máy chủ DNS một record mà server có quyền truy cập hoặc bản ghi tồn tại bên trong bộ đệm của server. Thông thường, một máy chủ DNS sẽ lưu các bản ghi DNS để ngăn chặn việc tiêu thụ thêm băng thông và giảm tải cho các máy chủ DNS khác.
+- Recursive là truy vấn mà DNS Server sẽ phải đưa ra câu trả lời đầy đủ cho truy vấn đó hoặc đưa ra thông báo lỗi. Tức là với truy vấn này, DNS Server sẽ chịu trách nhiệm đi truy vấn hộ người dùng và lấy kết quả, sau đó trả lại kết quả cho người dùng.
+
+- Interiative là truy vấn mà DNS Server có thể cung cấp câu trả lời hoặc 1 phần câu trả lời (như 1 lời giới thiệu) cho clients (hoặc đưa ra thông báo lỗi). Với truy vấn này, nếu DNS Server có câu trả lời cho truy vấn trong bộ nhớ đệm của nó, nó sẽ trả lại kết quả cho người dùng, nếu không, nó sẽ trả lại lời giới thiệu đến DNS Server biết được câu trả lời của truy vấn, để người dùng tự truy vấn.
+
+- Non-recursive query: đã có kết quả truy vấn rồi, nên sẽ trả kq luôn, chứ k đi truy vấn như 2 thằng kia nữa
+## Các bản ghi
+
+- A Record: Bản ghi ánh xạ địa chỉ : còn được gọi là bản ghi máy chủ DNS, lưu trữ tên máy chủ và địa chỉ IPv4 tương ứng của nó.
+
+- Bản ghi AAAA: Bản ghi địa chỉ IP Phiên bản 6 : lưu trữ tên máy chủ và địa chỉ IPv6 tương ứng của nó.
+
+- Bản ghi CNAME: Bản ghi Tên chuẩn : chỉ định một tên miền phải được truy vấn để giải quyết truy vấn DNS gốc. Do đó, nó có thể được sử dụng để đặt tên máy chủ thành tên máy chủ khác.
+
+- Bản ghi NS: Bản ghi Máy chủ tên : chỉ định rằng Vùng DNS, chẳng hạn như "example.com" được ủy quyền cho một Máy chủ tên có thẩm quyền cụ thể và cung cấp địa chỉ của máy chủ tên.
+
+- Bản ghi SOA: Bắt đầu cấp phép : bản ghi này xuất hiện ở phần đầu của tệp vùng DNS và chỉ định thông tin cốt lõi về vùng DNS, chẳng hạn như Máy chủ tên có thẩm quyền cho vùng DNS hiện tại, chi tiết liên hệ của quản trị viên tên miền, số sê-ri tên miền và thông tin về tần suất thông tin DNS cho vùng này sẽ được làm mới.
+
+- Bản ghi PTR: Ánh xạ ip thành tên miền

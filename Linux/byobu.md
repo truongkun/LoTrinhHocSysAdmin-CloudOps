@@ -22,7 +22,7 @@ Ta thấy dòng cuối cùng bên phải có các thông tin về các tab đang
 **Cách sử dụng byubo trên terminal:
 
 - Phím f1 rồi chọn `help`:
-![alt text](img/f1-)
+![alt text](/Linux/img/fsck1.png)
 
 - Phím f2: tạo tab mới 
 

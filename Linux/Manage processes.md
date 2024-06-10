@@ -83,6 +83,7 @@ free -h
 ![alt text](img/htop.png)
 
 - GT: 
+  - 1 2 3 4: là core cpu
   *Mức dùng cpu:*
   - Xanh lam: các tiến trình độ ưu tiên thấp
   - Xanh lục: các tiến trình người dùng (user)
@@ -97,6 +98,25 @@ free -h
   - Vàng: bộ nhớ cache
 
 ![alt text](img/htop2.png)
+
+**Tasks: 164, 642 thr; 1 running:**
+
+- Tasks: 164: Đây là tổng số tác vụ (processes) hiện đang chạy trên hệ thống.
+- 642 thr: Đây là tổng số luồng (threads) của các tác vụ. Mỗi tác vụ có thể bao gồm nhiều luồng.
+- 1 running: Đây là số tác vụ đang thực sự chạy trên CPU tại thời điểm hiện tại. Các tác vụ khác có thể đang chờ hoặc bị đình chỉ (sleeping).
+
+**Load average: 0.67 0.48 0.48:***
+
+- Đây là giá trị trung bình tải của hệ thống trong 1 phút, 5 phút và 15 phút qua.
+- 0.67: Tải trung bình trong 1 phút qua.
+- 0.48: Tải trung bình trong 5 phút qua.
+- 0.48: Tải trung bình trong 15 phút qua.
+- Giá trị tải trung bình là số lượng các tiến trình đang chờ để chạy trên CPU. Giá trị 1.0 tương đương với 100% công suất của một lõi CPU. Nếu bạn có một CPU lõi kép, giá trị 2.0 tương đương với 100% công suất của cả hai lõi.
+
+**Uptime: 01:41:35:**
+
+- Đây là thời gian hệ thống đã hoạt động liên tục kể từ lần khởi động gần nhất.
+- 01:41:35: Hệ thống đã chạy được 1 giờ 41 phút và 35 giây.
 
 **Mức tải trung bình**
 
