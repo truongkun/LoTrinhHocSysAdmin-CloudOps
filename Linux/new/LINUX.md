@@ -1306,15 +1306,16 @@ Các máy tính, điện thoại cá nhân,... nên sử dụng IP động(dễ 
 		Nếu không có thông tin trùng với truy vấn, server trả về thông tin giới thiệu(gần với truy vấn nhất) đến server DNS mức thấp hơn. client sau đó sẽ thực hiện truy vấn tới địa chỉ được giới thiệu(tiếp tục cho đến khi lỗi hoặc hết thời gian)
 + Các bản ghi DNS thường sử dụng:
 
-	+ A: Bản ghi lưu hostname với địa chỉ IPv4
+	+ A: Bản ghi lưu hostname và ánh xạ tới địa chỉ IPv4
 	+ AAAA: tương tự `A` nhưng với địa chỉ IPv6
-	+ CNAME: lưu tên hostname dưới tên khác, khi trả về client thì client sẽ truy vấn hostname với yêu cầu khác để biến bí danh thành `A hoặc AAAA`
-	+ MX: lưu hostname của server SMTP email, dùng khi định hướng emails tới domain này bởi dịch vụ email
-	+ TXT: lưu thông tin đọc được bởi người hoặc máy, dùng để xác minh, xác thực hoặc chuyển dữ liệu khác
-	+ NS: lưu thông tin nameserver có nhiệm vụ cung cấp thông tin DNS cho domain
-	+ PTR: ngược lại, cung cấp tên của hostname dựa vào địa chỉ IP
-	+ SRV: tương tự `MX`, nhưng dùng cho các giao thức liên lạc khác để giúp với việc phát hiện
+	+ CNAME: lưu tên hostname dưới tên khác. khi nhận được bản ghi này thì client sẽ thực hiện truy vấn tên bí danh mới để lấy bản ghi `A` hoặc `AAAA` tương ứng.
+	+ NS: lưu thông tin về nameserver chịu trách nhiệm cung cấp thông tin DNS cho một domain cụ thể.
+	+ PTR: gược lại của bản ghi A hoặc AAAA, nó cung cấp tên hostname dựa trên địa chỉ IP.
 	+ SOA: Bản ghi quyền quản trị cho vùng tên domain, thể hiện `authorirarive name server` cho domain hiện tại, thông tin liên hệ, serial và thông tin về sự thay đổi của DNS
+	+ MX: lưu hostname của server SMTP email, dùng khi định hướng emails tới domain này bởi dịch vụ email
+	+ SRV: tương tự `MX`, nhưng dùng cho các giao thức liên lạc khác để giúp với việc phát hiện
+	+ TXT: lưu thông tin đọc được bởi người hoặc máy, dùng để xác minh, xác thực hoặc chuyển dữ liệu khác
+
 + Để tìm địa chỉ IP cho domain:
 	
 		dig +short {domain-name}
