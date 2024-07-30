@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>SysAdminIntern</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="sysadminintern">SysAdminIntern</h1>
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#linux">Linux</a>
+      <ul>
+        <li><a href="#các-lệnh-cơ-bản">Các lệnh cơ bản</a>
+        <ul>
+        <li><a href="#thay-đổi-thư-mục"> Thay đổi thư mục</li>
+        <li><a href="#xem-thư-mục-đang-làm-việc"> Xem thư mục đang làm việc</a></li>
+        <li><a href="#lịch-sử-lệnh">Lịch sử lệnh</a></li>
+        <li><a href="#xử-lý-văn-bản">Xử lý văn bản</a></li>
+        </ul>
+</li>
+        <li><a href="#quản-lý-tiến-trình">Quản lý tiến trình</a>
+<ul>
+<li><a href="#thông-tin-tiến-trình">Thông tin tiến trình</a>
+<li><a href="#quản-lý-tiến-trình-kill">Quản lý tiến trình</a>
+</ul>
+<li><a href="#quản-lý-packages">Quản lý packages</a>
+	<ul>
+	<li><a href="#cài-đặt-phần-mềm">Cài đặt phần mềm</a></li>
+	<li><a href="#cập-nhật-thông-tin-package">Cập nhật thông tin package</a></li>
+	<li><a href="#cập-nhật-phiên-bản-package">Cập nhật phiên bản package</a></li>
+	<li><a href="#danh-sách-package-đã-cài">Danh sách package đã cài</a></li>
+	<li><a href="#tìm-kiếm-package-muốn-cài">Tìm kiếm package muốn cài</a></li>
+	</ul>
+</li>
+       <li><a href="#startup-script">StartUp Script</a>
+	<ul>
+	<li><a href="#tạo-file-service">Tạo file service</a></li>
+	<li><a href="#sử-dụng-cron">Sử dụng Cron</a></li>
+	<li><a href="#sử-dụng-rc.local">Sử dụng rc.local</a></li>
+	<li><a href="#sử-dụng-init.d">Sử dụng init.d</a></li>
+	</ul>
+</li> 
+       <li><a href="#quản-lý-hệ-thống">Quản lý hệ thống</a>
+	<ul>
+	<li><a href="#quản-lý-filesystems">Quản lý filesystems</a>
+	<ul>
+	<li><a href="#sửa-lỗi-filesystems">Sửa lỗi filesystems</a></li>
+	<li><a href="#tạo-filesystems">Tạo filesystems</a></li>
+	<li><a href="#mount-và-umount">Mount/Unmount filesystems</a></li>
+	</ul>
+</li>
+<li><a href ="#quản-lý-files">Quản lý files</a>
+<ul>
+<li><a href="#các-lệnh-cơ-bản-file">Các lệnh cơ bản</a></li>
+<li><a href="#tìm-kiếm-file">Tìm kiếm file</a></li>
+<li><a href="#quản-lý-quyền-truy-cập-sở-hữu">Quản lý quyền truy cập và sở hữu</a></li>
+<li><a href="#quản-lý-thuộc-tính">Quản lý thuộc tính</a></li>
+</ul>
+</li>
+<li><a href="#quản-lý-người-dùng-và-nhóm">Quản lý người dùng và nhóm</a>
+<ul>
+<li><a href="#người-dùng">Người dùng</a></li>
+<li><a href="#nhóm">Nhóm</a></li>
+</ul>
+</li>
+<li><a href="#quản-lý-disk">Quản lý disk</a>
+<ul>
+<li><a href="#kiểm-tra-disk">Kiểm tra disk</a></li>
+<li><a href="#phân-vùng-disk">Phân vùng disk</a></li>
+<li><a href ="#lab-disk">LAB</a></li>
+<li><a href ="#raid">RAID</a>
+	<ul>
+	<li><a href="#lab-raid">LAB</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li><a href="#quản-lý-log-file">Quản lý log file</a></li>
+<li><a href="#quản-lý-công-việc">Quản lý công việc</a></li>
+	</ul>
+</li>
+   </ul>
+    </li>
+    <li>
+      <a href="#network">Network</a>
+      <ul>
+      <li><a href="#ip">IP</a>
+		<ul>
+		<li><a href="#ip-tĩnh">IP tĩnh</a></li>
+		<li><a href="#ip-động">IP động</a></li>
+		</ul>
+		</li>
+      <li><a href="#dns">DNS</a>
+	<ul>
+	<li><a href="#lý-thuyết-dns">Lý thuyết</a></li>
+	<li><a href="#lab-dns">LAB</a></li>
+	</ul>
+		</li>
+      <li><a href="#dhcp">DHCP</a>
+		<ul>
+		<li><a href="#lý-thuyết-dhcp">Lý thuyết</a></li>
+		<li><a href="#lab-dhcp">LAB</a></li>
+		</ul>
+		</li>
+      <li><a href="#ssh">SSH</a></li>
+      <li><a href="#rsync-và-scp ">rsync và scp </a></li>
+      </ul>
+  </li>
+  </ol>
+</details>
+<h2 id="linux">Linux</h2>
+<h3 id="các-lệnh-cơ-bản">Các lệnh cơ bản</h3>
+<ol>
+<li>
+<p id="thay-đổi-thư-mục">Thay đổi thư mục:</p>
+<pre><code> cd [path]
+</code></pre>
+<p><code>path</code> có thể là tương đối hoặc tuyệt đối</p>
+</li>
+<li>
+<p id="xem-thư-mục-đang-làm-việc">Xem thư mục đang làm việc:</p>
+<pre><code> pwd [options]
+</code></pre>
+<p>options:</p>
+<ul>
+<li>-L: bao gồm cả symlinks</li>
+<li>-P: không bao gồm symlinks</li>
+</ul>
+</li>
+<li>
+<p id="lịch-sử-lệnh">Lịch sử lệnh:</p>
+<pre><code> history
+</code></pre>
+<p>nếu sử dụng bash thì lịch sử sẽ được lưu trong <code>.bash_history</code></p>
+<p>Xem 1 câu lệnh trước/sau sử dụng mũi tên lên/xuống.</p>
+<p>Kết quả trả về có dạng <code>{number} {command}</code>
+--&gt; thực thi lại câu lệnh <code>!{number}</code> ( <code>!!</code> sẽ thực thi lại câu lệnh cuối cùng)</p>
+<p>Tìm các lệnh trong lịch sử dùng reverse-i search sử dụng <code>CTRL + r</code> -&gt; câu lệnh -&gt; <code>CTRL + r</code> để duyệt hoặc <code>CTRL + s</code> duyệt ngược lại.</p>
+</li>
+<li>
+<p id="xử-lý-văn-bản">Xử lý văn bản:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html#cat-invocation">cat</a>: nối các văn bản và cho đầu ra là nội dung các file.</p>
+<pre><code>  cat [options] [file] ...
+</code></pre>
+<p>Tạo file:</p>
+<pre><code>  cat &gt; file
+</code></pre>
+<p>Gộp file:</p>
+<pre><code>  cat file1 file2 ... &gt; file_destination  
+</code></pre>
+<p>Ghi kết quả vào file:</p>
+<pre><code>  cat file1 &gt; file2 (ghi đè file hoặc tạo file nếu chưa tồn tại)
+</code></pre>
+<p>hoặc</p>
+<pre><code>  cat file1 &gt;&gt; file2 (ghi vào cuối file hoặc tạo file nếu chưa tồn tại)
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/tac">tac</a>: tương tự như <code>cat</code> nhưng in ngược lại (dòng cuối in đầu tiên)</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/sort">sort</a>: sắp xếp các dòng trong các tập files.</p>
+<pre><code>  sort [options] [file] ...
+</code></pre>
+<p>Ghi kết quả vào file:</p>
+<pre><code>  sort file -o file_destination
+</code></pre>
+<p>hoặc</p>
+<pre><code>  sort file &gt; temp &amp;&amp; mv temp file
+</code></pre>
+<p>Chỉ giữ lại những dòng không trùng lặp</p>
+<pre><code>  sort -u file
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/split">split</a>: chia file thành các file nhỏ</p>
+<pre><code>  split [option]... [file [prefix]]
+</code></pre>
+<p>--&gt; tạo ra các file prefixaa, prefixab, ... ( prefix mặc định là x)</p>
+<p>ví dụ: <code>split -l 1 file split_file</code> --&gt; chia file thành các file split_fileaa, split_fileab,... mỗi file có 1 dòng.</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/uniq">uniq</a>: báo cáo hoặc bỏ qua các dòng lặp lại trong file</p>
+<pre><code>  uniq [options] [input [output]]
+</code></pre>
+<p>kết hợp pipe: <code>sort file | uniq -cd</code> --&gt; cho lần lặp lại và dòng lặp lại.</p>
+<p><code>sort file | uniq -u</code> tìm kiếm dòng xuất hiện duy nhất trong file.</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/nl">nl</a>: trả về số dòng có trong files</p>
+<pre><code>  nl [options] [file]...
+</code></pre>
+<p>kết quả trả về có dạng <code>{number} {line}</code></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/head">head</a>: trả về nửa đầu của files(mặc định là 10 dòng đầu nếu không dùng <code>-n</code>)</p>
+<pre><code>  head [-n {number}] [file]...
+</code></pre>
+<p>Ví dụ có thể yêu cầu trả về 5 dòng đầu sử dụng</p>
+<pre><code>  head -n 5 {file}
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/tail">tail</a>: trả về nửa sau của files(mặc định là 10 dòng cuối nếu không dùng <code>-n</code>)</p>
+<pre><code>  tail [-n {number}] [file]...
+</code></pre>
+<p>Tương tự như <code>head</code>, yêu cầu trả về 5 dòng cuối sử dụng</p>
+<pre><code>  tail -n 5 {file}
+</code></pre>
+</li>
+<li>
+<p><a href="https://greenwoodsoftware.com/less/">less</a>: giống <code>more</code> nhưng có thể tiến 1 trang bằng <code>space</code> hoặc lùi 1 trang bằng <code>ESC + v</code></p>
+</li>
+</ul>
+<p>Tìm kiếm ngược trong các trang sử dụng <code>?</code>, tìm kiếm xuôi sử dụng <code>/</code>.</p>
+<pre><code>	less [options] [file]...
+</code></pre>
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/cut">cut</a>: trích xuất 1 đoạn dữ liệu từ các files.</p>
+<pre><code>  cut option... [file]...
+</code></pre>
+<p>trích xuất khoảng ký tự/trường từng dòng:</p>
+<pre><code>  cut --characters|fields|bytes={number} | {number},{number} | {number}-{number} | {number}- | -{number}
+</code></pre>
+<p>có thể thêm <code>--delimiter=&quot; {character} &quot;</code> để xác định dấu phân cách.</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/wc">wc</a>: in ra số từ, byte, số dòng, ký tự hoặc chiều dài dòng dài nhất.</p>
+<pre><code>  wc [option]... [file]...
+</code></pre>
+<p>Ví dụ đếm số dòng trong file</p>
+<pre><code>  wc --lines {file}
+</code></pre>
+<p>hoặc đếm độ dài của số dòng dài nhất trong file</p>
+<pre><code>  wc --max-line-length {file}
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/grep/manual/grep.html">grep</a>: trả về các dòng phù hợp với chuỗi/ký tự tìm kiếm.</p>
+<pre><code>  grep [option...] PATTERNS [file...]
+</code></pre>
+<p>nếu muốn tìm kiếm nhiều từ khóa hoặc từ khóa bắt đầu bằng &quot;-&quot;:</p>
+<pre><code>  grep [option...] -e PATTERNS... [file...]
+</code></pre>
+<p>hoặc nếu các PATTERNS nằm trong 1 file có thể sử dụng:</p>
+<pre><code>  grep [option...] -f PATTERN_FILE ... [file...]
+</code></pre>
+<p>Mặc định sẽ tìm kiếm cả in hoa và in thường, muốn tìm kiếm riêng biệt sử dụng <code>-i</code> hoặc <code>-y</code></p>
+<p>Ví dụ tìm kiếm &quot;alice&quot; mà không phải là &quot;Alice&quot;</p>
+<pre><code>  grep -i &quot;alice&quot; {file}
+</code></pre>
+<p><code>grep</code> thường sẽ sử dụng cùng <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet">regex</a> để tìm kiếm các chuỗi cụ thể.</p>
+<p>ví dụ: tìm kiếm số điện thoại có &quot;-&quot; ở giữa</p>
+<pre><code>  grep -Eo '[0-9]{3}+[0-9]{3}+[0-9]{4}' file.txt
+</code></pre>
+<p>các output hợp lệ <code>012-322</code>, <code>1-2-3</code>,...</p>
+<p>ví dụ: tìm kiếm 1 dòng sau các dòng chứa &quot;Alice&quot; ở file test</p>
+<pre><code>  grep -A 1 &quot;Alice&quot; test
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/sed/manual/sed.html">sed</a>: lọc và xử lý chữ trong file hoặc kết quả của pipeline.</p>
+<pre><code>  sed [option]... {script} [file]...
+</code></pre>
+<p>sử dụng <code>-i</code> nếu muốn thay đổi tại chỗ thay vì in ra màn hình.</p>
+<p>ví dụ: Xóa từ dòng thứ 5 đến hết trong file test</p>
+<pre><code>  sed -i '5,$d' test
+</code></pre>
+<p>ví dụ: Thay thế &quot;h&quot; bằng &quot;l&quot; trong toàn bộ file</p>
+<pre><code>  sed -i 's/h/l/g' file
+</code></pre>
+<p>với <code>s</code> cho biết thực hiện lệnh thay thế và <code>g</code> cho biết thay thế trong toàn bộ file</p>
+<p>nếu muốn sử dụng cùng <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet">regex</a> để xử lý các chuỗi cụ thể thì nên dùng <a href="https://github.com/onetrueawk/awk">awk</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/onetrueawk/awk">awk</a>: ngôn ngữ quét và xử lý chữ.</p>
+<pre><code>  awk [option] 'selection _criteria {action}' file
+</code></pre>
+<p>nếu muốn in ra file thay vì màn hình</p>
+<pre><code>  awk [option] 'selection _criteria {action}' file &gt; output_file
+</code></pre>
+<p>các biến có sẵn để thuận tiện sử dụng  <code>NR</code>: số dòng, <code>NF</code>: trường cuối cùng, <code>$0</code>: cả dòng,...</p>
+<p>ví dụ:</p>
+<ul>
+<li>
+<p>In từ đầu tiên dòng thứ 3 đến dòng 6</p>
+<pre><code>  awk 'NR==3, NR==6 {print NR, $1}' file
+</code></pre>
+</li>
+<li>
+<p>In dòng chứa từ <code>foo</code></p>
+<pre><code>  awk '/foo/ {print $0}' file
+</code></pre>
+</li>
+<li>
+<p>In tổng giá trị của trường cuối cùng</p>
+<pre><code>  awk '{s+=$NF} END {print s}' file
+</code></pre>
+</li>
+<li>
+<p>In các dòng có từ thứ 2 chứa ký tự <code>h</code> tiếp sau đó là <code>e</code> hoặc <code>o</code></p>
+<pre><code>  awk '$2 ~ /h[eo]/ {print $0}' file
+</code></pre>
+</li>
+</ul>
+<p><a href="#sysadminintern">back to top</a></p>
+</li>
+</ul>
+<h3 id="quản-lý-tiến-trình">Quản lý tiến trình</h3>
+<ol>
+<li>
+<p id="thông-tin-tiến-trình">Thông tin tiến trình:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Lệnh <code>ps</code>: thông tin về các tiến trình đang chạy của người dùng hiện tại.
+<code>ps aux</code> sẽ liệt kê toàn bộ tiến trình của toàn bộ người dùng(<code>a</code>), các tiến trình không kết nối với terminal nào(<code>x</code>) và nhiều thông tin hơn(<code>u</code>).</p>
+</li>
+<li>
+<p>Lệnh <code>top</code>: tương tự như lệnh <code>ps</code> nhưng đưa thông tin liên tục thời gian thực cho đến khi báo dừng(<code>CRTL C</code>).</p>
+</li>
+<li>
+<p>Lệnh <code>htop</code>: tương tự <code>top</code> nhưng nâng cấp giao diện, dễ đọc.</p>
+</li>
+<li>
+<p>Lệnh <code>uptime</code>: cho biết <code>load-average</code> của hệ thống. <code>load-average</code> là trung bình số threads đang chạy hoặc trong hàng chờ để chạy.
+Lệnh <code>uptime</code> trả về kết quả <code>load average: &lt;0,74&gt;, &lt;0,77&gt;, &lt;0,64&gt;</code> - các thông số lần lượt là tải trung bình của hệ thống trong 1 phút, 5 phút, và 15 phút qua.</p>
+</li>
+<li>
+<p>Các phương pháp lấy thông tin ram, cpu, id:</p>
+<ul>
+<li>
+<p>Sử dụng <code>ps</code>:</p>
+<p>Xem tiến trình nào sử dụng nhiều cpu, ram nhất
+<code>ps aux --sort -%cpu|mem | head -n 2</code></p>
+<p>Lấy thông tin tiến trình/ kiểm tra tiết trình có đang chạy không
+<code>ps aux | grep {command}</code></p>
+</li>
+<li>
+<p>Sử dụng <code>top</code>:</p>
+<p><code>top -o %CPU|MEM</code></p>
+<p>hoặc sử dụng <code>t</code>, <code>m</code>, <code>l</code> trong khi chạy <code>top</code> để sắp xếp theo <code>cpu</code>, <code>memory</code>, <code>load avg</code>.</p>
+</li>
+<li>
+<p>Sử dụng <code>htop</code>:</p>
+<p><code>htop --sort PERCENT_CPU|PERCENT_MEM</code></p>
+<p>hoặc sử dụng <code>F6</code> trong khi chạy <code>htop</code> và lựa chọn theo yêu cầu.</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p id="quản-lý-tiến-trình-kill">Quản lý tiến trình:</p>
+<p>Kết thúc tiến trình sử dụng <code>kill</code>:</p>
+<pre><code> kill [Signal or option] pid --default TERM
+</code></pre>
+<p>Liệt kê các signal:</p>
+<pre><code> kill -l 
+</code></pre>
+<p>Các signal phổ biến</p>
+<pre><code> SIGHUP		1			hangup
+ SIGINT 	2			Interrupt from keyboard 
+ SIGKILL	9			Kill signal
+ SIGTERM	15			Termination signal 
+ SIGSTOP	17,19,23		Stop process
+</code></pre>
+<p>Lệnh <code>kill</code> gửi tín hiệu TERMINATE tới tiến trình, cho phép nó <code>clean up</code>(giải phóng bộ nhớ, xử lý tiến trình con,...). Tiến trình có thể bỏ qua nếu đang trong lúc giải phóng bộ nhớ,....</p>
+<p>Lệnh <code>kill -9</code> buộc tiến trình dừng mà không đợi <code>clean up</code></p>
+</li>
+</ol>
+<h3 id="quản-lý-packages">Quản lý packages</h3>
+<p>Các packages của các distro sẽ được chứa trong Repositories. Cài đặt, lấy thông tin từ các package đều thông qua các Repositories này. Ngoài Repositories chính thức của distro do chính distro quản lý, có thể thêm các Repositories ngoài.</p>
+<p>Kiểm tra các Repositories đã cài đặt</p>
+<pre><code>grep -Erh ^deb /etc/apt/sources.list*
+</code></pre>
+<p><code>Dependencies</code> bao gồm các thư viện, package và modules cần cài đặt để ứng dụng có thể chạy và hoạt động.</p>
+<p>Ví dụ khi dùng <code>apt show firefox</code>, có thể thấy <code>Depends</code> của nó là <code>debconf</code>.</p>
+<p><code>Binary package</code> là gói ứng dụng bao gồm tệp thực thi(có sẵn), được build từ mã nguồn và không thể đảo ngược(giấu mã nguồn và không thể thay đổi)</p>
+<p>Ubuntu có các file <code>.deb</code> gồm 2 phần, 1 phần chứa thông tin và 1 phần chứa tệp nhị phân của ứng dụng.</p>
+<p>Sử dụng <code>dbkg -I &lt;file.deb&gt;</code> để có được thông tin như version, maintainer, conflicts, ....</p>
+<p>và <code>dbkg -c &lt;file.deb&gt;</code> để liệt kê các file thông thường của file .deb</p>
+<ol>
+<li>
+<p id="cài-đặt-phần-mềm">Cài đặt phần mềm:</p>
+<p>Sử dụng package manager:</p>
+<pre><code> sudo apt install {package}
+</code></pre>
+<p>Sử dụng file deb:</p>
+<pre><code> sudo dpkg -i path/to/deb_file
+</code></pre>
+<p>Compile from source:</p>
+<pre><code> cd path/to/source
+ ./configure -- Resolving Dependencies, nếu có
+ make
+ sudo make install -- nếu chưa install
+</code></pre>
+<p>Cài đặt sử dụng <code>flatpak</code>, <code>snapd</code>,...:</p>
+<p>Ubuntu đang sử dụng mặc định <code>snapd</code></p>
+<pre><code> sudo snap install &lt;package_name&gt;
+</code></pre>
+<p>Fedora, Linux Mint, Pop!_OS, Manjaro, CentOs đã cài đặt sẵn <code>flatpak</code></p>
+<pre><code> flatpak install &lt;remoteserver&gt; &lt;appid&gt; --cài đặt
+ flatpak run &lt;appid&gt; --chạy
+</code></pre>
+</li>
+<li>
+<p id="gỡ-bỏ-phần-mềm">Gỡ phần mềm:</p>
+<pre><code> sudo apt remove {package} -y
+</code></pre>
+<p>sau khi gỡ bỏ package thì nên sử dụng <code>sudo apt update</code>.</p>
+<p>Để gỡ bỏ các package đã không còn cần tới, sử dụng</p>
+<pre><code> sudo apt autoremove
+</code></pre>
+</li>
+<li>
+<p id="cập-nhật-thông-tin-package">Cập nhật thông tin package:</p>
+<pre><code> sudo apt update
+</code></pre>
+<p>câu lệnh sử dụng khi cần cập nhật danh sách package trong kho repositories.</p>
+</li>
+<li>
+<p id="cập-nhật-phiên-bản-package">Cập nhật phiên bản package:</p>
+<pre><code> sudo apt upgrade
+</code></pre>
+<p>câu lệnh sẽ cập nhật phiên bản của các package có sẵn trong máy thông qua thông tin về package cập nhật từ <code>sudo apt update</code>.</p>
+</li>
+<li>
+<p id="danh-sách-package-đã-cài">Danh sách package đã cài:</p>
+<pre><code> sudo apt list --installed
+</code></pre>
+<p>từ đây nếu muốn xem đã cài package nào chưa <code>sudo apt list --installed | grep {package}</code></p>
+</li>
+<li>
+<p id="tìm-kiếm-package-muốn-cài"> Tìm kiếm package muốn cài:</p>
+<pre><code> sudo apt search &lt;package_name&gt;
+</code></pre>
+<p>hoặc</p>
+<pre><code> sudo apt-cache search &lt;package_name&gt;
+</code></pre>
+</li>
+</ol>
+<p><a href="#sysadminintern">back to top</a></p>
+<h3 id="startup-script">StartUp Script</h3>
+<ol>
+<li>
+<p id="tạo-file-service">Tạo file service:</p>
+<p>Có thể tạo file với đuôi .service tại <code>/etc/systemd/system</code></p>
+<p>Cấu trúc file cơ bản</p>
+<pre><code> [Unit]
+ Description=My custom startup script
+
+ [Service]
+ ExecStart=/bin/bash path/to/bash_script 
+
+ [Install]
+ WantedBy=multi-user.target
+</code></pre>
+<p>Để có thể chạy khi hệ thống khởi động <code>sudo systemctl enable custom.service</code></p>
+</li>
+<li>
+<p id="sử-dụng-cron">Sử dụng cron:</p>
+<p>Có thể thếm vào crontab file với câu lệnh <code>crontab -e</code> đoạn code khởi tạo cùng hệ thống</p>
+<pre><code>@reboot sh path/to/file
+</code></pre>
+<p>Tuy nhiên, không phải phiên bản nào của cron cũng hỗ trợ <code>@reboot</code>.</p>
+</li>
+<li>
+<p id="sử-dụng-rc.local">Sử dụng rc.local:</p>
+<p>Có thể thêm vào file <code>/etc/rc.d/rc.local</code> đoạn code chạy file (vì file rc.local sẽ chạy lúc hệ thống khởi động)</p>
+<pre><code> sh path/to/file
+</code></pre>
+<p>Cần đảm bảo file rc.local có thể chạy được <code>chmod +x /etc/rc.d/rc.local</code></p>
+</li>
+<li>
+<p id="sử-dụng-init.d">Sử dụng init.d:</p>
+<p>Có thể thêm file bash script vào <code>/etc/init.d</code>, ví dụ <code>/etc/init.d/myscript</code></p>
+<p>Cho phép script vừa tạo khởi chạy</p>
+<pre><code> sudo chmod +x /etc/init.d/myscript
+</code></pre>
+<p>Khởi tạo <code>daemon</code></p>
+<pre><code> sudo update-rc.d &lt;myscript&gt; defaults
+</code></pre>
+</li>
+</ol>
+<p><a href="#sysadminintern">back to top</a></p>
+<h3 id="quản-lý-hệ-thống">Quản lý hệ thống</h3>
+<h4 id="quản-lý-filesystems">Quản lý filesystems</h4>
+<p>Filesystem là cách quản lý dữ liệu trong partition theo 1 cách dễ quản lý. Dùng để quản lý dữ liệu đọc và lưu của hệ thống.</p>
+<p>Partition cài đặt điểm bắt đầu, kết thúc của phân vùng trên ổ cứng.</p>
+<p>Các filesystems thông thường: ext{2,3,4}, xfs, ntfs, vfat, proc,...</p>
+<p>Cả ext và xfs đều là <code>journaling filesystem</code>(filesystem lưu trữ <code>log</code> về thay đổi đến filesystem)</p>
+<table>
+<thead>
+<tr>
+<th>ext4</th>
+<th>xfs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hỗ trợ partition lên đến 1EiB, kích thước file 16TiB</td>
+<td>hỗ trợ partition, file lên đến 8EiB</td>
+</tr>
+<tr>
+<td>x</td>
+<td>inodes(lưu thuộc tính, địa chỉ của dữ liệu) phân bổ tự động</td>
+</tr>
+<tr>
+<td>giới hạn độ dài của xattr(thuộc tính thêm) không quá 1 khối (4K)</td>
+<td>giới hạn độ dài của xattr là 64K</td>
+</tr>
+<tr>
+<td>x</td>
+<td>có sẵn công cụ backup và khôi phục dữ liệu(<code>xfsdump</code>, <code>xfsrestore</code>)</td>
+</tr>
+<tr>
+<td>hỗ trợ <code>journal checksum</code>(kiểm tra dữ liệu có đúng không)</td>
+<td>x</td>
+</tr>
+<tr>
+<td>có thể tắt tính năng <code>journal</code></td>
+<td>x</td>
+</tr>
+<tr>
+<td>có thể trực tiếp shrink volume</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>Hệ thống thư mục trong linux:</p>
+<table>
+<thead>
+<tr>
+<th>Thư mục</th>
+<th>Chức năng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bin</td>
+<td>chứa các câu lệnh như ls, cp,..., các file có thể thực thi</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>chứa các file để khởi tạo hệ thống</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>chứa các file thiết bị, được tạo trong thời gian khởi động hoặc khi cắm</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>chứa các file config hệ thống như tên người dùng, mật khẩu,...</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>chứa các file của người dùng</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>thư viện chứa code mà ứng dụng dùng</td>
+</tr>
+<tr>
+<td>/media</td>
+<td>các thiết bị ngoại vi như usb,... được mount vào đây</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>là điểm mount bằng các câu lệnh tạm thời</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>được dành cho các gói package phần mềm bổ sung</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td>chứa các file hệ thống ảo hiện thông tin về CPU, kernel,...</td>
+</tr>
+<tr>
+<td>/root</td>
+<td>chứa thư mục của superuser</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>chứa các công cụ tiện ích như là init,... thường cần để tải, xóa, tái định dạng,... các lệnh này cần chạy bằng <code>sudo</code></td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>chứa các file khởi chạy, thư viện, tài nguyên cần chia sẻ bởi ứng dụng và services.</td>
+</tr>
+<tr>
+<td>/srv</td>
+<td>chứa dữ liệu liên quan đến server</td>
+</tr>
+<tr>
+<td>/sys</td>
+<td>thư mục ảo chứa các thông tin liên quan đến thiết bị kết nối tới máy tính</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>chứa các file tạm thời (thường tạo bởi các ứng dụng đang chạy)</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>chứa các thư mục như <code>/log</code>(các file log của hệ thống), <code>/mail</code>(mail nhận được), <code>/spool</code>(hàng chờ), <code>/src</code>(src chưa được compile) và <code>/tmp</code>(tmp file được lưu sau khi tắt máy)</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p id="sửa-lỗi-filesystems">Sửa lỗi filesystems: sử dụng <a href="https://manned.org/fsck"> fsck</a></p>
+<p>các filesystems cần kiểm tra và sửa nên unmount trước khi chạy câu lệnh.</p>
+<pre><code> fsck [option] path/to/filesystems|device|label|UUID
+</code></pre>
+<p>nếu không có <code>option</code> thì sẽ chỉ trả về tình trạng của filesystems</p>
+<p><code>option -r</code>: để người dùng tự chọn cách sửa</p>
+<p><code>option -a</code>: tự động sửa</p>
+</li>
+<li>
+<p id="tạo-filesystems">Tạo filesystems: sử dụng <a href="https://manned.org/mkfs">mkfs</a></p>
+<pre><code> mkfs [options] [-t type] [fs-option] device [size]
+</code></pre>
+<p>không có <code>-t type</code> thì mặc định sử dụng <code>ext2</code></p>
+<p>trả về 0 thành công và 1 nếu thất bại.</p>
+</li>
+<li>
+<p id="mount-và-umount">Mount/Unmount filesystems: sử dụng <a href="https://manned.org/mount.8">mount</a> và <a href="https://manned.org/umount.8">umount</a></p>
+</li>
+</ol>
+<ul>
+<li>
+<p>mount: đăng ký filesystem của thiết bị vào 1 điểm chỉ định trên cây thư mục. Thông tin các thiết bị thường được mount tới đâu được lưu trữ tại <code>/ect/fstab</code></p>
+<p>Các lệnh mount cơ bản:</p>
+<ul>
+<li>
+<p>mount thiết bị vào 1 thư mục</p>
+<pre><code>  mount -t filesystem_type path/to/device_file path/to/target_directory
+</code></pre>
+</li>
+<li>
+<p>mount thư mục vào thư mục khác</p>
+<pre><code>  mount --bind path/to/old_dir path/to/new_dir
+</code></pre>
+</li>
+<li>
+<p>mount filesystem đã có trong <code>/etc/fstab</code></p>
+<pre><code>  mount /my_drive
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>umount: bỏ liên kết filesystem đã mount khỏi cây thư mục.</p>
+<p>Các lệnh umount cơ bản:</p>
+<ul>
+<li>
+<p>umount sử dụng đường dẫn tới thiết bị</p>
+<pre><code>  umount path/to/device_file
+</code></pre>
+</li>
+<li>
+<p>umount sử dụng đường dẫn tới địa chỉ mount</p>
+<pre><code>  umount path/to/mounted_directory
+</code></pre>
+</li>
+</ul>
+<p>Để tự động mount filesystems thì cần thêm các thông tin cần thiết vào <code>/ect/fstab</code>:</p>
+<pre><code>  UUID=&lt;uuid of device&gt; &lt;mount point&gt; &lt;file system type&gt; &lt;mount option&gt; &lt;dump&gt; &lt;pass&gt;
+</code></pre>
+<ul>
+<li>UUID: thông qua <code>blkid path/to/device</code></li>
+<li>mount option: quyền truy cập của người dùng</li>
+<li>dump: thông thường là <code>0</code></li>
+<li>pass: thứ tự được kiểm tra lúc reboot, thường là <code>2</code>, <code>1</code> nếu là root và <code>0</code> nếu swap</li>
+</ul>
+</li>
+</ul>
+<h4 id="quản-lý-files">Quản lý files</h4>
+<ol>
+<li>
+<p id="các-lệnh-cơ-bản-file">Các lệnh cơ bản:</p>
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/ls">ls</a>:
+liệt kê nội dung thư mục
+<code>ls [option]... [path/to/folder]</code></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/cp">cp</a>:
+copy file hoặc thư mục
+<code>cp [option]... path/to/file|path/to/directory path/to/target_file|path/to/target_directory</code></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/mv">mv</a>:
+di chuyển file hoặc thư mục
+<code>mv [option]... file|directory... target_file|target_directory</code></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/rm">rm</a>:
+xóa file hoặc thư mục
+<code>rm [option]... [file]...</code></p>
+<p>(<code>rmdir</code> chỉ xóa thư mục rỗng)</p>
+</li>
+<li>
+<p><a href="https://manned.org/man/freebsd-13.1/touch">touch</a>:
+tạo file và thay đổi thời gian sửa đổi/truy cập
+tạo file:<code>touch path/to/file1 path/to/file2 ...</code></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/ln">ln</a>:
+tạo liên kết tới file và thư mục(có thể là symlink hoặc hard link)</p>
+<ul>
+<li>symlink: trỏ tới một file hoặc thư mục</li>
+<li>hard link: như một tên khác cho file, file hoặc thư mục được link có cùng inode(chứa toàn bộ thông tin về file)</li>
+</ul>
+<pre><code>ln [option]... path/to/file|path/to/directory path/to/symlink|path/to/hardlink
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p id="tìm-kiếm-file">Tìm kiếm file:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><a href="https://manned.org/find">find</a>: Có thể tìm kiếm file dựa trên tên, đuôi, size, quyền của file, thời gian tạo,...</p>
+<p>ví dụ:</p>
+<ul>
+<li>
+<p>tìm kiếm file được chỉnh sửa trong vòng 10 ngày
+<code>find / -mtime 10</code></p>
+</li>
+<li>
+<p>tìm kiếm file có dung lượng trong khoảng 50M đến 100M
+<code>find / -size +50M -size -100M</code></p>
+</li>
+<li>
+<p>tìm kiếm file tên <code>test</code> hoặc <code>Test</code>
+<code>find -iname &quot;test&quot;</code></p>
+</li>
+<li>
+<p>tìm các thư mục rỗng
+<code>find / -type d -empty</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://manned.org/locate">locate</a>: Tìm kiếm dựa trên file database tại <code>/var/cache/locate/locatedb</code>, trước khi tìm kiếm cần <code>sudo updatedb</code></p>
+<p><code>locate [option]... pattern...</code></p>
+<p>ví dụ:</p>
+<ul>
+<li>
+<p>tìm kiếm file có đuôi <code>.ini</code>, giới hạn 3 kết quả
+<code>locate &quot;*.ini&quot; -l 3</code></p>
+</li>
+<li>
+<p>tìm kiếm các file vẫn còn trên máy có tên <code>test</code> ở mục <code>home</code>
+<code>locate -i -e &quot;test&quot; | grep &quot;/home&quot;</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://manned.org/whereis">whereis</a>: Tìm kiếm tệp nhị phân(<code>-b</code>), nguồn(<code>-s</code>) và hướng dẫn(<code>-m</code>) cho một câu lệnh</p>
+<pre><code>  whereis [option]... [command]...
+</code></pre>
+<p>Mặc định(không có option) sẽ tìm kiếm toàn bộ về câu lệnh</p>
+<p>ví dụ:</p>
+<ul>
+<li>
+<p>tìm kiếm tệp nhị phân cho <code>gcc</code> tại thư mục <code>/usr/lib</code> và hướng dẫn tại <code>/usr/share</code></p>
+<pre><code>  whereis -bm -B /usr/lib -M /usr/share -f gcc
+</code></pre>
+</li>
+<li>
+<p>tìm kiếm toàn bộ các tệp nhị phân khác thường(các lệnh có hơn nhiều hơn 1 tệp nhị phân)</p>
+<pre><code>  whereis -u *
+</code></pre>
+</li>
+<li>
+<p>tìm kiếm tệp nhị phân của <code>gcc</code> và hường dẫn của <code>git</code></p>
+<pre><code>  whereis -b gcc -m git
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://manned.org/which">which</a>: Tìm kiếm đường dẫn đầy đủ của các lệnh</p>
+<pre><code>  which [-a] command... 
+</code></pre>
+<p><code>-a</code> sẽ in ra toàn bộ các kết quả chứa câu lệnh.</p>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p id="quản-lý-quyền-truy-cập-sở-hữu">Quản lý quyền truy cập, sở hữu:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/chown-invocation.html#chown-invocation">chown</a>: quản lý quyền của người dùng và nhóm</p>
+<pre><code>  chown [option]... {new_owner | --reference=ref_file} file…
+</code></pre>
+<p>nếu sử dụng <code>new_owner</code> thì chỉ định người sở hữu mới và/hoặc nhóm bằng <code>[owner] [ : [group] ]</code></p>
+<p>Các <code>user</code> và <code>group</code> khác không phải <code>owner</code> đều được cho vào <code>other</code></p>
+<p>Ví dụ: Cho nhóm <code>readers</code> sở hữu thư mục <code>/Reader</code>(bao gồm tất cả file và subfolder)</p>
+<pre><code>  sudo chown -R :readers /Reader 
+</code></pre>
+<p>Nếu muốn cho cả nhóm <code>readers</code> và user <code>reader</code> sở hữu thư mục <code>/Reader</code></p>
+<pre><code>  sudo chown -R reader:readers /Reader
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/chgrp-invocation.html#chgrp-invocation">chgrp</a>: quản lý quyền của nhóm</p>
+<pre><code>  chgrp [option]… {group | --reference=ref_file} file…
+</code></pre>
+<p><code>group</code> có thể là tên hoặc id(bắt đầu với <code>+</code>) của nhóm.</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/chmod-invocation.html#chmod-invocation">chmod</a>: quản lý quyền truy cập của file</p>
+<pre><code>  chmod [option]… {mode | --reference=ref_file} file…
+</code></pre>
+<p>mode:</p>
+<ul>
+<li>
+<p>chữ: <code>augo</code> <code>-+=</code> <code>rwx</code></p>
+<p>ví dụ: cho mọi người đọc file, bỏ quyền viết file với tất cả ngoại trừ chủ sở hữu
+<code>sudo chmod a+r,go-w file</code></p>
+</li>
+<li>
+<p>số: <code>[special mode bit]{file's owner}{other in group}{other not in group}</code>, <code>4:r,2:w,1:x</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>
+<p id="quản-lý-thuộc-tính">Quản lý thuộc tính:</p>
+<pre><code> chattr [ -RVf ] [ -v version ] [ mode ] files...
+</code></pre>
+<p>Mục đích chính là khiến file không thể thay đổi bởi người dùng (kể cả superuser) cho đến khi thuộc tính được sửa lại.</p>
+<p>Các mode thông thường:</p>
+<ul>
+<li>
+<p><code>i</code>: không thể rename, tạo symlink, thực thi, ghi.</p>
+</li>
+<li>
+<p><code>a</code>: không thể rename, tạo symlink, thực thi, chỉ có thể ghi vào cuối file</p>
+</li>
+<li>
+<p><code>d</code>: không được backup khi tiến trình dump chạy</p>
+</li>
+<li>
+<p><code>s</code>: 1 file có thuộc tính này bị sửa, thay đổi được cập nhật đồng bộ trên ổ cứng	
+ví dụ:</p>
+</li>
+<li>
+<p>Khiến 1 file không thể thay đổi, xóa</p>
+<pre><code>  sudo chattr +i file
+</code></pre>
+<p>thì <code>sudo rm -f file</code> cũng sẽ trả về lỗi <code>Operation not permitted</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="quản-lý-người-dùng-và-nhóm">Quản lý người dùng và nhóm</h4>
+<ol>
+<li>
+<p id="người-dùng">Người dùng:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Thêm người dùng:</p>
+<pre><code>  useradd | adduser {user_name}
+</code></pre>
+<p>--&gt; tạo ra thư mục home, các file bash, mail spool tại /var/spool/mail, nhóm mới tên với user_name.</p>
+</li>
+<li>
+<p>Cập nhật mật khẩu người dùng</p>
+<pre><code>  sudo passwd {user_name}
+</code></pre>
+</li>
+<li>
+<p>Xóa người dùng</p>
+<pre><code>  userdel | deluser [option] {user_name}
+</code></pre>
+<p>--&gt; nếu không có option <code>-r</code> sẽ chỉ xóa người dùng, không xóa file, thư mục.</p>
+</li>
+<li>
+<p>Thay đổi người dùng</p>
+<pre><code>  usermod [option] {user}
+</code></pre>
+<p>Các option thường sử dụng:</p>
+<ul>
+<li>Đặt ngày hết hạn cho tài khoản: <code>--expiredate</code></li>
+<li>Thêm nhóm: <code>-aG</code></li>
+<li>Thay đổi địa chỉ thư mục home: <code>-d</code></li>
+<li>Khóa/mở khóa mật khẩu: <code>-L/-u</code></li>
+</ul>
+<p>Ví dụ: Thêm người dùng tên <code>bob</code> vào nhóm <code>dba_user</code></p>
+<pre><code>  	sudo usermod -aG dba_user bob
+</code></pre>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p id="nhóm">Nhóm:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Thêm nhóm</p>
+<pre><code>  groupadd [options] {group_name}
+</code></pre>
+<p>Tạo nhóm với id cho trước</p>
+<pre><code>  sudo groupadd --gid id group_name
+</code></pre>
+</li>
+<li>
+<p>Xóa nhóm</p>
+<pre><code>  groupdel [options] {group_name}
+</code></pre>
+</li>
+<li>
+<p>Thay đổi nhóm</p>
+<pre><code>  groupmod [options] {group_name}
+</code></pre>
+<p>Thay đổi tên nhóm</p>
+<pre><code>  sudo groupmod --new-name new_group group_name
+</code></pre>
+<p>Thay đổi id nhóm</p>
+<pre><code>  sudo groupmod --gid new_id group_name
+</code></pre>
+</li>
+</ul>
+<h4 id="quản-lý-disk">Quản lý disk</h4>
+<ol>
+<li>
+<p id="kiểm-tra-disk">Kiểm tra disk:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/df-invocation.html#df-invocation">df</a>:</p>
+<p>Báo cáo tổng quan về dung lượng tổng, đã sử dụng, còn lại của các filesystems.</p>
+<pre><code>  df [option]... [file]...
+</code></pre>
+<p><code>df -h</code> sẽ hiển thị dung lượng ở dạng <code>M,G</code> dễ đọc</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/du-invocation.html#du-invocation">du</a>:</p>
+<p>Báo cáo dung lượng cần cho file hoặc các file trong thư mục.</p>
+<pre><code>  du [option]... [file]...
+</code></pre>
+<p>Tương tự, <code>du -h</code> sẽ hiện thị bộ nhớ file chiếm dưới dạng <code>K,M,G</code>.</p>
+<p>--&gt; Điểm khác biệt của 2 câu lệnh là <code>df</code> sẽ chỉ quan tâm đến mounted filesystems chứa file/thư mục, không đi vào chi tiết và <code>du</code> chỉ  trả về dung lượng mỗi file chiếm.</p>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p id="phân-vùng-disk">Phân vùng disk:</p>
+<p>Liệt kê các disk:</p>
+<pre><code> fdisk -l
+</code></pre>
+<p>Bắt đầu việc phân vùng:</p>
+<pre><code> fdisk [options] {device}
+</code></pre>
+<p>hoặc:</p>
+<pre><code> cfdisk [options] {device} 	--TUI
+</code></pre>
+</li>
+<li>
+<p id="lab-disk">LAB:</p>
+<p>Thêm 1 ổ 60G với tên <code>/dev/sda</code></p>
+<p>Ổ cứng 60G chia thành 10G,20G,30G</p>
+<p>--&gt; sử dụng <code>fdisk /dev/sda</code></p>
+<p>Tạo các folder <code>/mnt/data1</code>, <code>/mnt/data2</code> và <code>/mnt/data3</code> sẽ mount vào</p>
+<p>--&gt; <code>sudo mkdir -p /mnt/data1 /mnt/data2 /mnt/data3</code></p>
+<p>Ổ 10G format ext4, mount <code>/mnt/data1</code></p>
+<p>--&gt; <code>sudo mkfs.ext4 /dev/sda1</code></p>
+<p>--&gt; <code>sudo mount /dev/sda1 /mnt/data1</code></p>
+<p>Ổ 20G format xfs, mount <code>/mnt/data2</code></p>
+<p>--&gt; <code>sudo apt install xfsprogs</code></p>
+<p>--&gt; <code>sudo mkfs.xfs /dev/sda2</code></p>
+<p>--&gt; <code>sudo mount /dev/sda2 /mnt/data2</code></p>
+<p>Ổ 30G format ext3, mount <code>/mnt/data3</code></p>
+<p>--&gt; <code>sudo mkfs.ext3 /dev/sda3</code></p>
+<p>--&gt; <code>sudo mount /dev/sda3 /mnt/data3</code></p>
+<p>Có thể kiểm tra đã tạo và mount đúng chưa sử dụng <code>lsblk</code></p>
+<p>Tìm kiếm UUID sử dụng <code>sudo blkid</code></p>
+<p>Tự động mount bằng cách thêm vào file <code>/etc/fstab</code>(theo cú pháp tại <a href="#qu%E1%BA%A3n-l%C3%BD-filesystems">Quản lý Filesystems</a>)</p>
+<pre><code>UUID=d10afb5c-80b0-4636-a6c0-a41e8ddfbb47      	/data1  ext4    defaults 	0	2
+UUID=5867dd50-59f1-4c62-b1e1-3552ff8b42c1       /data2  xfs     defaults	0	2
+UUID=54ae99a0-8b6f-4d57-91d9-910394825c9c       /data3  ext3    defaults	0	2
+</code></pre>
+<p>Sử dụng <code>sudo mount -a</code> hoặc khởi động lại hệ thống và kiểm tra.</p>
+</li>
+<li>
+<p id="raid">RAID:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Khái niệm:</p>
+<p>Là lưu cùng 1 dữ liệu vào nhiều đĩa ổ cứng, cho phép các hoạt động đọc-ghi dữ liệu đồng thời, tăng hiệu năng, tăng MTBF(trung bình thời gian bị lỗi của phần cứng).</p>
+</li>
+<li>
+<p>Cấu trúc và nguyên lý hoạt động: RAID được chia làm nhiều loại RAID 0,1,2,3,4,5,6,1+0,0+1,....</p>
+<ul>
+<li>RAID 0(Tối thiểu 2 ổ cứng): Không có dữ liệu trùng lặp, chia dữ liệu thành nhiều phần và mỗi phần lưu vào 1 ổ. Tốc độ đọc và ghi tăng nhưng mức độ đảm bảo dữ liệu không thay đổi so với 1 ổ.</li>
+<li>RAID 1(Tối thiểu 2 ổ cứng): Các ổ đều chứa dữ liệu giống nhau. Tốc độ đọc tăng nhưng tốc độ ghi không đổi, dữ liệu được đảm bảo so với 1 ổ.</li>
+<li>RAID 5(Tối thiểu 3 ổ): Dữ liệu chia ra làm nhiều phần và các phần đều được lưu trữ vào từng ổ ngoại trừ ổ cuối cùng lưu trữ bản sao backup của dữ liệu trên(dữ liệu backup này sẽ được lưu vào các ổ khác nhau, lần lượt từng ổ). Dữ liệu được đảm bảo nếu mất đi 1 ổ, tốc độ đọc-ghi tăng so với 1 ổ nhưng không bằng RAID 0.</li>
+</ul>
+</li>
+</ul>
+<p>Ví dụ: Có 3 ổ cứng, dữ liệu A được chia làm A1, A2 lưu vào ổ 1 và ổ 2, ổ 3 sẽ lưu backup của A. Dữ liệu B được chia làm B1, B2 lưu vào ổ 2 và ổ 3, ổ 1 lưu backup của B.</p>
+<ul>
+<li>
+<p>Quản lý RAID sử dụng <a href="https://manned.org/mdadm">mdadm</a>:</p>
+<pre><code>  mdadm [mode] &lt;raiddevice&gt; [options] &lt;component-devices&gt;
+</code></pre>
+<p>Các lệnh cơ bản:</p>
+<ul>
+<li>
+<p>Tạo array:</p>
+<pre><code>  sudo mdadm --create /dev/md/MyRAID --level raid_level --raid-devices number_of_disks /dev/sdXN
+</code></pre>
+</li>
+<li>
+<p>Dừng array:</p>
+<pre><code>  sudo mdadm --stop /dev/md0
+</code></pre>
+</li>
+<li>
+<p>Đánh dấu ổ lỗi:</p>
+<pre><code>  sudo mdadm --fail /dev/md0 /dev/sdXN
+</code></pre>
+</li>
+<li>
+<p>Xóa ổ, phải đánh dấu ổ lỗi trước khi remove ổ:</p>
+<pre><code>  sudo mdadm --remove /dev/md0 /dev/sdXN
+</code></pre>
+</li>
+<li>
+<p>Thêm ổ vào array:</p>
+<pre><code>  sudo mdadm --assemble /dev/md0 /dev/sdXN
+</code></pre>
+<p>hoặc</p>
+<pre><code>  sudo mdadm -Gv /dev/md0 -l 1 -n 3 -a /dev/sdc3
+</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><code>-l 1</code>: raid 1</li>
+<li><code>-n 3</code>: tổng số ổ(tính cả ổ cần thêm)</li>
+<li><code>-a</code>: thêm</li>
+</ul>
+</li>
+<li>
+<p>Xóa RAID metadata:</p>
+<pre><code>  sudo mdadm --zero-superblock /dev/sdXN
+</code></pre>
+</li>
+<li>
+<p>Kiểm tra thông tin chi tiết:</p>
+<pre><code>  sudo mdadm --detail /dev/md0
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p id="lab-raid">LAB:</p>
+<p>Cấu hình VM theo <a href="https://gist.github.com/fevangelou/2f7aa0d9b5cb42d783302727665bf80a">hướng dẫn</a>(tạo toàn bộ partitions cần thiết unformatted trước khi cấu hình raid).</p>
+<p>Kiểm tra cài đặt sử dụng <code>cat /proc/mdstat</code></p>
+<pre><code>  md0: active raid1 sda2[1] sdb2[0] -- boot partition
+  md1: active raid1 sda3[0] sdb3[1] -- root
+</code></pre>
+<p>Cấu hình 2 ổ còn lại Raid 0:</p>
+<pre><code>  sudo mdadm --create --verbose /dev/md2 --level=0 --raid-devices=2 /dev/sdc /dev/sdd
+</code></pre>
+<p>Mount vào /mnt/md2 để kiểm tra:</p>
+<pre><code>  sudo mkfs.ext4 /dev/md2
+  sudo mkdir -p /mnt/md2
+  sudo mount /dev/md2 /mnt/md2
+  cd /mnt/md2
+</code></pre>
+<p>Kiểm tra sử dụng <code>sysbench</code>:</p>
+<pre><code>  sudo sysbench fileio --file-total-size=15G --file-test-mode=rndrw prepare
+</code></pre>
+<p><code>--file-total-size=15G</code>: file test có độ lớn 15G</p>
+<p><code>--file-test-mode=rndrw</code>: chế độ đọc viết ngẫu nhiên</p>
+<p>--&gt; <code>16106127360 bytes written in 14.81 seconds (1036.594 Mib/sec)</code></p>
+<pre><code>  sudo sysbench fileio --file-total-size=15G --file-test-mode=rndrw run
+</code></pre>
+<p>--&gt; <code>File operations:   			reads/s: 9588.64   			writes/s: 6392.36   			fsyncs/s: 20460.02   		Throughput:   			read, MiB/s: 149.82   			written, MiB/s: 99.88</code></p>
+<pre><code>  sudo sysbench fileio --file-total-size=15G --file-test-mode=rndrw cleanup
+</code></pre>
+<p>--&gt; Xóa các file đã tạo</p>
+<p>Reset 2 ổ cứng:</p>
+<pre><code>  sudo umount /dev/md2
+  sudo mdadm --stop /dev/md2
+  sudo mdadm --zero-superblock /dev/sdc
+  sudo mdadm --zero-superblock /dev/sdd
+</code></pre>
+<p>Cấu hình 2 ổ RAID 1:</p>
+<pre><code>  sudo mdadm --create --verbose /dev/md2 --level=1 --raid-devices=2 /dev/sdc /dev/sdd
+</code></pre>
+<p>Mount vào /mnt/md2 để kiểm tra:</p>
+<pre><code>  sudo mkfs.ext4 /dev/md2
+  sudo mkdir -p /mnt/md2
+  sudo mount /dev/md2 /mnt/md2
+  cd /mnt/md2
+</code></pre>
+<p>Sử dụng <code>sysbench</code> để kiểm tra:</p>
+<pre><code>  sudo sysbench fileio --file-total-size=15G --file-test-mode=rndrw prepare
+</code></pre>
+<p>--&gt; <code>16106127360 bytes written in 23.59 seconds (651.01 MiB/sec)</code></p>
+<pre><code>  sudo sysbench fileio --file-total-size=15G --file-test-mode=rndrw run
+</code></pre>
+<p>--&gt; <code>File operations:   			reads/s: 6781.03   			writes/s: 4520.66   			fsyncs/s: 14470.25   		Throughput:   			read, MiB/s: 105.95   			witten, MiB/s: 70.64</code></p>
+<p>So sánh RAID 1 và RAID 0 tại 2 ổ <code>/dev/sdc</code> và <code>/dev/sdd</code> cho thấy:</p>
+<p>RAID 0 trong quá trình: đọc 149.82 MiB/s, ghi 99.88 MiB/s</p>
+<p>RAID 1 trong quá trình: đọc 105.95 MiB/s, ghi 70.64 MiB/s</p>
+<p>--&gt; Tốc độ đọc, ghi của RAID 0 nhanh hơn RAID 1.</p>
+<p>Trong VM có 2 ổ hệ thống là <code>/dev/sda</code> và <code>/dev/sdb</code>. Thử loại bỏ <code>/dev/sdb</code> tại VM</p>
+<p>--&gt; Thời gian boot lâu nhưng hệ thống vẫn boot thành công.</p>
+<p>Kiểm tra sử dụng <code>cat /proc/mdstat</code>:</p>
+<pre><code>  md1: active raid1 sda3[0]
+  md0: active raid1 sda2[3]
+</code></pre>
+<p>Kiểm tra chi tiết sử dụng <code>sudo mdadm --detail /dev/md0</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Major</th>
+<th>Minor</th>
+<th>RaidDevice</th>
+<th>State</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>removed</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>8</td>
+<td>2</td>
+<td>1</td>
+<td>active sync</td>
+<td>/dev/sda2</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="quản-lý-log-file">Quản lý log file</h4>
+<p>Trong phần <a href="#qu%E1%BA%A3n-l%C3%BD-filesystems">thư mục</a>, các log file được lưu tại <code>/var/log</code> và các thư mục con trong đó.</p>
+<p><code>/var/log/syslog</code> chứa dữ liệu hoạt động của toàn hệ thống trong <code>Debian, Ubuntu,...</code>.</p>
+<p><code>/var/log/auth.log</code>: những vấn đề liên quan đến bảo mật.</p>
+<p><code>/var/log/kern.log</code>: những sự kiện, lỗi, cảnh báo về kernel...</p>
+<p><code>Rotate Log</code>: quá trình giới hạn các file log về kích thước, thời gian,... thì sẽ đổi tên file log và tạo ra 1 file log mới trùng tên với file log ban đầu, tiếp tục ghi log vào file mới tạo.</p>
+<p>Để thực hiện <code>Rotate Log</code>, sử dụng <code>logrotate</code></p>
+<p>Cấu hình <code>logrotate</code> tại <code>/etc/logrotate.conf</code>:</p>
+<pre><code># see &quot;man logrotate&quot; for details
+# global options do not affect preceding include directives
+# rotate log files weekly
+weekly
+
+# use the adm group by default, since this is the owning group
+# of /var/log/syslog.
+su root adm
+
+# keep 4 weeks worth of backlogs
+rotate 4
+
+# create new (empty) log files after rotating old ones
+create
+
+# use date as a suffix of the rotated file
+#dateext
+
+# uncomment this if you want your log files compressed
+#compress
+
+# packages drop log rotation information into this directory
+include /etc/logrotate.d
+
+# system-specific logs may also be configured here.
+</code></pre>
+<p>Cấu hình từng log file cụ thể tại <code>/etc/logrotate.d/</code>, ví dụ <code>/etc/logrotate.d/rsyslog</code></p>
+<pre><code>/var/log/syslog
+/var/log/mail.info
+/var/log/mail.warn
+/var/log/mail.err
+/var/log/mail.log
+/var/log/daemon.log
+/var/log/kern.log
+/var/log/auth.log
+/var/log/user.log
+/var/log/lpr.log
+/var/log/cron.log
+/var/log/debug
+/var/log/messages
+{
+        rotate 4
+        weekly
+        missingok
+        notifempty
+        compress
+        delaycompress
+        sharedscripts
+        postrotate
+                /usr/lib/rsyslog/rsyslog-rotate
+        endscript
+}
+</code></pre>
+<p>---&gt; toàn bộ các file <code>/var/log/syslog</code>, <code>/var/log/mail.info</code>,... sẽ có cùng cấu hình với các thông số:</p>
+<ul>
+<li><code>create {permission} {owner} {group}</code>: tạo file log với <code>{permission}</code> cho chủ sở hữu và nhóm.</li>
+<li><code>rotate 4</code>: giữ 4 file log</li>
+<li><code>weekly</code>: chạy rotate hàng tuần</li>
+<li><code>missingok</code>: nếu file log không tồn tại sẽ tự động chuyển đến cấu hình log file khác mà không thông báo lỗi</li>
+<li><code>notifempty</code>: không rotate nếu file trống</li>
+<li><code>compress</code>: nén file sau khi rotate(mậc định sử dụng <code>gzip</code>, <code>compresscmd {zip_method}</code> nếu muốn sử dụng phương pháp khác)</li>
+<li><code>delaycompress</code>: không nén file ngay, file được nén vào lần rotate lần sau</li>
+<li><code>sharescripts</code>: các scripts được thêm vào cấu hình sẽ chỉ chạy 1 lần thay vì chạy cho mỗi file</li>
+<li><code>postrotate ... endscript</code>: các scripts chạy sau khi rotate và trước khi nén, muốn chạy sau khi nén thì sử dụng <code>lastaction</code></li>
+<li>Ngoài ra còn 1 số thông số như:
+<ul>
+<li><code>copy</code>: tạo bản sao mà không thay đổi bản gốc</li>
+<li><code>dateext</code>: thêm thông số ngày,tháng, năm vào tên file gốc thay vì chỉ thêm số ( sử dụng thêm <code>dateformat</code> để điều chỉnh cách thể hiện ngày, tháng, năm thêm vào)</li>
+<li><code>mail</code>: các file log hết hạn, trước khi xóa sẽ được gửi đến địa chỉ mail</li>
+<li><code>size</code>: log file sẽ rotate khi nó lớn hơn số bytes cài đặt...</li>
+</ul>
+</li>
+</ul>
+<p>Có thể test các cấu hình các log file sử dụng <code>sudo logrotate /etc/logrotate.conf --debug</code></p>
+<h4 id="quản-lý-công-việc">Quản lý công việc</h4>
+<p>Nếu công việc thực thi lặp đi lặp lại theo 1 thời gian, kế hoạch cụ thể thì nên sử dụng <code>cron</code>.</p>
+<p>Có thể tạo file script tại <code>/etc/cron.{hourly|daily|weekly|monthly}</code>.</p>
+<p>Trong phần <a href="#startup-script">StartUp Script</a>, các file script có thể tự khởi chạy sử dụng <code>@reboot</code> trong <code>cron</code>. Ngoài ra, có thể lập trình thời gian chạy khác cho file script. Thêm đoạn code vào <code>crontab -e</code></p>
+<pre><code>	{minute} {hour} {day of month} {month} {day of week} /bin/sh path/to/command
+</code></pre>
+<p>với các giá trị <code>minute, hour, day of month, month, day of week</code>, ngoài các giá trị cụ thể, còn có:</p>
+<ul>
+<li><code>*</code>: tất cả các giá trị</li>
+<li><code>,</code>: 2 hoặc nhiều lần thực thi lệnh</li>
+<li><code>-</code>: khoảng thời gian thực thi lệnh</li>
+<li><code>/</code>: khoảng thời gian cụ thể</li>
+<li><code>L</code>: ngày cuối cùng của tháng(<code>* * L * *</code>)/thứ 7(<code>* * * * L</code>)/ngày cuối cùng của thứ trong tháng(<code>* * * * 6L</code> thứ 6 cuối cùng của tháng)...</li>
+<li><code>W</code>: ngày gần nhất trong tuần(ví dụ <code>* * 15W * *</code>: ngày trong tuần gần nhất với ngày 15)</li>
+<li><code>#</code>: ngày của tuần(ví dụ <code>* * * * 6#3</code>: thứ 6 thứ 3)</li>
+<li><code>?</code>: không có giá trị cụ thể</li>
+</ul>
+<p>Ví dụ:</p>
+<ul>
+<li>
+<p>Thực thi lệnh 2 lần 1 ngày vào lúc 6h và 18h:</p>
+<pre><code>  0 6,18 * * * /bin/sh path/to/file
+</code></pre>
+</li>
+<li>
+<p>Thực thi lệnh mỗi 6h:</p>
+<pre><code>  0 */6 * * * /bin/sh path/to/file
+</code></pre>
+</li>
+<li>
+<p>Thực thi lệnh hàng quý ngày mồng 1 lúc 8h:</p>
+<pre><code>  * 8 1 */3 * /bin/sh path/to/file
+</code></pre>
+</li>
+<li>
+<p>Thực thi lệnh vào 3 giờ, 2 ngày 1 lần:</p>
+<pre><code>  0 3 */2 * * /bin/sh path/to/file
+</code></pre>
+</li>
+</ul>
+<p>Nếu chỉ muốn chạy lệnh 1 lần trong 1 thời gian biết trước, có thể sử dụng <code>at</code>: lệnh <code>at</code> sẽ gửi mail lại cho người cài đặt về kết quả output và lỗi.</p>
+<pre><code>echo {command} | at {-t time hoặc now + time minutes}
+</code></pre>
+<p>Thực thi nhiều lệnh bằng <code>at</code>:</p>
+<pre><code>at {-t time hoặc now + time minutes}
+--&gt;  command --&gt; ... --&gt; CRTL d
+</code></pre>
+<p><a href="#sysadminintern">back to top</a></p>
+<h2 id="network">Network</h2>
+<h3 id="ip">IP</h3>
+<p>Thông tin về IP <code>ip -c a</code></p>
+<ol>
+<li>
+<p id="ip-tĩnh">IP tĩnh:</p>
+<p>Thiết lập IP tĩnh cho Ubuntu: chỉnh sửa file tại <code>/etc/netplan/</code>(nếu không có file có thể tạo sử dụng <code>sudo netplan generate</code>)</p>
+<p>Nội dung file cơ bản:</p>
+<pre><code>network:
+	version: 2
+	renderer: NetworkManager
+	ethernets:
+		ens33:
+			dhcp4: false
+			dhcp6: false
+			addresses: 
+				- 192.168.109.100/24
+			routes:
+				- to: default
+				  via: 192.168.109.28
+			nameservers:
+				addresses:
+					- 8.8.8.8
+</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><code>version: 2</code>: định nghĩa mạng phiên bản 2</li>
+<li><code>renderer</code>: công cụ kiểm soát mạng, mặc định là <code>systemd-networkd</code></li>
+<li><code>ethernets</code>: mạng có dây, các thiết bị khác như <code>modems</code>,<code>wifis</code>,<code>bridges</code></li>
+<li><code>ens33</code>: tên thiết bị mạng có trong <code>ip -c a</code></li>
+<li><code>dhcp4</code>, <code>dhcp6</code>: vì đang thiết lập IP tĩnh, không muốn tự động cấp IP cho mạng nên để giá trị <code>false</code></li>
+<li><code>addresses</code>: IP tĩnh muốn thiết lập</li>
+<li><code>routes</code>: danh sách các địa chỉ ( <code>- to</code>) và cách để đến các địa chỉ này (<code>via</code>)(router hoặc thiết bị mạng cung cấp IP)</li>
+<li><code>nameservers</code>: DNS server</li>
+</ul>
+<p>Kiểm tra cấu hình đã đúng chưa</p>
+<pre><code> sudo netplan try
+</code></pre>
+<p>Nếu không có lỗi sẽ được hỏi có muốn sử dụng cấu hình luôn. Hoặc có thể tự sử dụng cấu hình</p>
+<pre><code> sudo netplan apply
+</code></pre>
+<p>Thiết lập IP tĩnh cho CentOs: tạo file <code>/etc/sysconfig/network-scripts/ifcfg-&lt;device_name&gt;</code></p>
+<p>Nội dung file cơ bản:</p>
+<pre><code>TYPE=Ehternet
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+NAME=ens33
+UUID=3277c242-cd77-46bb-a316-061b15d48c68
+DEVICE=ens33
+ONBOOT=yes
+IPADDR=192.168.109.100
+PREFIX=24
+GATEWAY=192.168.109.28
+DNS1=8.8.8.8
+</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><code>DEVICE</code>,<code>NAME</code>: tên thiết bị mạng</li>
+<li><code>BOOTPROTO</code>: cấu hình IP tĩnh nên để static, nếu là DHCP thì là <code>dhcp</code></li>
+<li><code>ONBOOT</code>: khi hệ thống reboot, network tự động bật lên với cấu hình mạng tương ứng</li>
+<li><code>IPADDR</code>: địa chỉ IP tĩnh</li>
+<li><code>PREFIX</code>: subnet mask lớp mạng IP sử dụng</li>
+<li><code>DEFROUTE</code>: muốn sử dụng default gateway</li>
+<li><code>GATEWAY</code>: địa chỉ IP gateway</li>
+<li><code>DNS1</code>: dns server</li>
+<li><code>UUID</code>: có được thông qua <code>uuidgen ens33</code></li>
+<li><code>IPV4_FAILURE_FATAL</code>: cần IPv4 cho kết nối hoàn thiện</li>
+</ul>
+</li>
+<li>
+<p id="ip-động">IP động:</p>
+<p>Với Ubuntu: Chỉnh sửa file tại <code>/etc/netplan/</code> với nội dung</p>
+<pre><code>network:
+	version: 2
+	renderer: NetworkManager
+	ethernets:
+		ens33:
+			dhcp4: true
+			dhcp6: true
+</code></pre>
+<p>Với CentOs: thay đổi <code>BOOTPROTO=dhcp</code> và loại bỏ <code>IPADDR=192.168.109.100</code>, <code>PREFIX=24</code>, <code>GATEWAY=192.168.109.28</code>, <code>DNS1=8.8.8.8</code></p>
+<pre><code>TYPE=Ehternet
+BOOTPROTO=dhcp
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+NAME=ens33
+UUID=3277c242-cd77-46bb-a316-061b15d48c68
+DEVICE=ens33
+ONBOOT=yes
+</code></pre>
+</li>
+</ol>
+<p>Sử dụng IP tĩnh cho các server và thiết bị mạng (các thiết bị cần được truy cập bằng các thiết bị, hệ thống khác --&gt; dễ tìm kiếm)</p>
+<p>Các máy tính, điện thoại cá nhân,... nên sử dụng IP động(dễ dàng gán các địa chỉ IP từ các địa chỉ IP khả dụng)</p>
+<p><a href="#sysadminintern">back to top</a></p>
+<h3 id="dns">DNS</h3>
+<ol>
+<li>
+<p id="lý-thuyết-dns">Lý thuyết:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>DNS (Domain name system): hệ thống phân giải tên miền, từ tên miền có thể trả về địa chỉ IP tương ứng và ngược lại.</p>
+</li>
+<li>
+<p>Cơ chế hoạt động:</p>
+<ul>
+<li>Người dùng nhập tên miền hoặc địa chỉ trang web muốn truy cập</li>
+<li>Trình duyệt gửi tin, truy vấn DNS đệ quy để tìm IP hoặc địa chỉ mạng tương ứng</li>
+<li>Nếu <code>recursor DNS server</code> không có kết quả, nó sẽ truy vấn tới các server khác theo trình tự: <code>root name server</code>, <code>Top-level domain name server</code> và <code>authoritative name server</code></li>
+<li>Ba loại server cùng làm việc và điều hướng cho đến khi nhận được thông tin DNS chứa IP cần truy vấn. Thông tin sau đó được gửi ngược lại <code>server DNS đệ quy</code> và trang web người dùng tìm kiếm được hiển thị. Công việc chính của <code>root name server</code> và <code>TLD name server</code> là định hướng, hiếm khi cung cấp thông tin</li>
+<li><code>recursor DNS server</code> lưu, hoặc tạm lưu vào bộ nhớ đệm thông tin domain và địa chỉ IP của nó để lần sau có thể trực tiếp xử lý truy vấn của domain, IP đó thay vì lại truy vấn vào các server khác</li>
+<li>Nếu yêu cầu truy vấn đã đến <code>authoritative name server</code> mà không có kết quả, sẽ trả lại thông báo lỗi</li>
+</ul>
+</li>
+<li>
+<p>Các loại DNS server:</p>
+<ul>
+<li>Recursor Server:	
+Hoạt động như một thư viện, sẽ tìm kiếm thông tin về địa chỉ IP trong cơ sở dữ liệu của mình, nếu có thì trả về địa chỉ IP, nếu không sẽ truy vấn tới các server khác.</li>
+<li>Root name Server:
+Là server đầu tiên mà <code>Recursor Server</code> sẽ tìm kiếm nếu không có thông tin về địa chỉ IP. Là dịch vụ phân giải tên miền gốc, quản lý tất cả tên miền top-level, giúp định hướng truy vấn đến địa chỉ.</li>
+<li>TLD name Server:
+Lưu thông tin tên miền có phần mở rộng chung(.com, .net, .org,...), trả về địa chỉ của tên miền thấp hơn.</li>
+<li>Authoritative name Server:
+Lưu trữ toàn bộ thông tin về domain và subdomain, phân giải địa chỉ IP cần thiết cho <code>Recursor server</code> nếu có.</li>
+<li>Local main server:
+Duy trì và phát triển bởi tư nhân, lưu trữ domain và IP trả về truy vấn trực tiếp, không thông qua các server khác.</li>
+</ul>
+</li>
+<li>
+<p>Các loại truy vấn DNS:</p>
+<ul>
+<li>Truy vấn đệ quy:
+Server trả về thông tin được yêu cầu(bằng cách gọi các server khác) hoặc báo lỗi nếu không tìm thấy</li>
+<li>Truy vấn không đệ quy:
+Server trả về trực tiếp thông tin dựa vào lưu trữ trước đó</li>
+<li>Truy vấn lặp lại:
+Nếu không có thông tin trùng với truy vấn, server trả về thông tin giới thiệu(gần với truy vấn nhất) đến server DNS mức thấp hơn. client sau đó sẽ thực hiện truy vấn tới địa chỉ được giới thiệu(tiếp tục cho đến khi lỗi hoặc hết thời gian)</li>
+</ul>
+</li>
+<li>
+<p>Các bản ghi DNS thường sử dụng:</p>
+<ul>
+<li>A: Bản ghi lưu hostname và ánh xạ tới địa chỉ IPv4</li>
+<li>AAAA: tương tự <code>A</code> nhưng với địa chỉ IPv6</li>
+<li>CNAME: lưu tên hostname dưới tên khác. khi nhận được bản ghi này thì client sẽ thực hiện truy vấn tên bí danh mới để lấy bản ghi <code>A</code> hoặc <code>AAAA</code> tương ứng.</li>
+<li>NS: lưu thông tin về nameserver chịu trách nhiệm cung cấp thông tin DNS cho một domain cụ thể.</li>
+<li>PTR: ngược lại của bản ghi A hoặc AAAA, nó cung cấp tên hostname dựa trên địa chỉ IP.</li>
+<li>SOA: Bản ghi quyền quản trị cho vùng tên domain, thể hiện <code>authorirarive name server</code> cho domain hiện tại, thông tin liên hệ, serial và thông tin về sự thay đổi của DNS</li>
+<li>MX: lưu hostname của server SMTP email, dùng khi định hướng emails tới domain này bởi dịch vụ email</li>
+<li>SRV: tương tự <code>MX</code>, nhưng dùng cho các giao thức liên lạc khác để giúp với việc phát hiện</li>
+<li>TXT: lưu thông tin đọc được bởi người hoặc máy, dùng để xác minh, xác thực hoặc chuyển dữ liệu khác</li>
+</ul>
+</li>
+<li>
+<p>Để tìm địa chỉ IP cho domain:</p>
+<pre><code>  dig +short {domain-name}
+</code></pre>
+<p>ở đây để tìm địa chỉ IP của trang web <code>dantri.vn</code> sử dụng <code>dig +short dantri.vn</code> --&gt; <code>42.113.206.28</code></p>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p id="lab-dns">LAB:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Cấu hình DNS server
+Cấu hình DNS nghe IPv4: Sửa đổi file <code>/etc/default/named</code></p>
+<pre><code>  OPTIONS=&quot;-u bind -4&quot;
+</code></pre>
+<p>Cấu hình Forward Zone (tên miền sang ip) và Reverse Zone (ip sang tên miền)  tại <code>/etc/bind/named.conf.local</code></p>
+<pre><code>  zone &quot;toilamlap.com&quot; IN { 
+  	type master;
+  	file &quot;/etc/bind/forward.toilamlap.com&quot;; 
+  	allow-update {none; };
+  }; 
+  
+  zone &quot;89.45.103.in-addr.arpa&quot; IN { --địa chỉ ngược lại của 3 số đầu ip
+  	type master;
+  	file &quot;/etc/bind/reverse.toilamlap.com&quot;;
+  	allow-update {none; };
+  };
+</code></pre>
+<p>Tạo các file<code>forward.toilamlap.com</code> và <code>reverse.toilamlap.com</code> bằng các file mẫu</p>
+<pre><code>  sudo cp /etc/bind/db.local /etc/bind/forward.toilamlap.com
+
+  sudo cp /etc/bind/db.127 /etc/bind/reverse.toilamlap.toilamlap.com
+</code></pre>
+<p>Cấu hình file <code>forward.toilamlap.com</code></p>
+<pre><code>  $TTL	604800
+  @	IN	SOA	toilamlap.com.	root.toilamlap.com. (
+  				   11	; Serial --tăng mỗi lần thay đổi
+  				604800	; Refresh
+  				86400   ; Retry
+  				2419200	; Expire
+  				604800 ); Negative Cache TTL
+  @	IN	NS	toilamlap.com.
+  	IN	A	103.45.89.45
+</code></pre>
+<p>Cấu hình file <code>reverse.toilamlap.com</code></p>
+<pre><code>  $TTL	604800
+  @	IN	SOA	toilamlap.com.	root.toilamlap.com. (
+  				21	; Serial --tăng mỗi lần thay đổi
+  				604800	; Refresh
+  				86400   ; Retry
+  				2419200	; Expire
+  				604800 ); Negative Cache TTL
+  @	IN	NS	toilamlap.com.
+  	IN	A	103.45.89.45
+  45	IN	PTR	toilamlap.com.
+</code></pre>
+<p>Kiểm tra <code>config</code> đã hợp lệ chưa</p>
+<pre><code>  sudo named-checkconf /etc/bind/named.conf.local
+  
+  sudo named-checkzone toilamlap.com /etc/bind/forward.toilamlap.com
+  -- zone toilamlap.com/IN: loaded serial 11
+  -- OK
+  sudo named-checkzone toilamlap.com /etc/bind/reverse.toilamlap.com	
+  -- zone toilamlap.com/IN: loaded serial 21
+  -- OK
+</code></pre>
+</li>
+<li>
+<p>Cấu hình client
+Khi chưa trỏ client vào DNS server</p>
+<pre><code>  dig toilamlap.com 
+  -- com.	5	IN	SOA	a.gtld-servers.net.	nstld.verisign-grs.com.	17044772599	1800	900	604800	86400
+</code></pre>
+<p>Trỏ client vào DNS server tại <code>/etc/resolv.conf</code></p>
+<pre><code>  search toilamlap.com
+  nameserver 192.168.109.130 --ip của dns server
+</code></pre>
+<p>Sau khi trỏ</p>
+<pre><code>  dig toilamlap.com
+  -- toilamlap.com.	6453	IN	A	103.45.89.45
+  -- ;;SERVER: 192.168.109.130#53(192.168.109.130) (UDP)
+
+  dig -x 103.45.89.45
+  -- 45.89.45.103.in-addr.arpa.	6468	IN	PTR	toilamlap.com.
+  -- ;;SERVER: 192.168.109.130#53(192.168.109.130) (UDP)
+</code></pre>
+<p>--&gt; DNS server chạy port mặc định 53 UDP</p>
+</li>
+</ul>
+<p><a href="#sysadminintern">back to top</a></p>
+<h3 id="dhcp">DHCP</h3>
+<ol>
+<li>
+<p id="lý-thuyết-dhcp">Lý thuyết:</p>
+<p>DHCP giao tiếp sử dụng giao thức UDP, dùng port 67 để nghe thông tin đến và port 68 để trả lời.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Nguyên lý hoạt động:</p>
+<ul>
+<li>Client tạo bản tin <code>DISCOVERY</code> để yêu cầu cung cấp IP gửi cho server</li>
+<li>Client chưa biết địa chỉ chính xác của server sẽ cấp IP nên gửi bản tin dưới dạng boardcast</li>
+<li>Server nhận bản tin <code>DISCOVERY</code> và kiểm tra địa chỉ IP nào phù hợp để cấp pháp</li>
+<li>Server gửi bản tin <code>OFFER</code>(bao gồm thông tin về IP và các cấu hình khác mà client yêu cầu để truy cập mạng) dưới dạng boardcast</li>
+<li>Client nhận và chọn <code>OFFER</code> đầu tiên nhận được. Nếu không nhận được <code>OFFER</code> trong 1 khoảng thời gian, client sẽ gửi lại bản tin <code>DISCOVERY</code></li>
+<li>Client gửi bản tin <code>REQUEST</code> dưới dạng boardcast, server nào nhận <code>OFFER</code> thì có nghĩa là client đồng ý nhận IP, server nào không nhận <code>OFFER</code> thì bỏ qua gói tin này</li>
+<li>Server nhận <code>OFFER</code> kiểm tra IP còn sử dụng được hay không. Nếu còn thì ghi nhận thông tin và gửi lại gói tin <code>PACK</code>, nếu không gửi gói tin <code>PNAK</code> và quay lại bước 1</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p id="lab-dhcp">LAB:</p>
+<p>Cấu hình DHCP server tại <code>/etc/dhcp/dhcpd.conf</code></p>
+<pre><code>default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+
+ddns-update-style none;
+subnet 192.168.109.0 netmask 255.255.255.0 {
+	range 192.168.109.100 192.168.109.200;
+	option routers 192.168.109.254;
+	option domain-name-servers 192.168.109.135 192.168.109.136;
+}
+host dungnt-dns {
+hardware ethernet 00:0c:29:8f:ff:3a;
+fixed-address 192.168.109.10;
+}
+</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><code>default-lease-time</code>: thời gian tối thiểu mà thiết bị gán 1 IP</li>
+<li><code>max-lease-time</code>: thời gian tối đa mà IP có thể gán cho thiết bị</li>
+<li><code>authoritative</code>: Server DHCP là server chính thức cho mạng cục bộ</li>
+<li><code>ddns-update-style</code>: Server liệu có thử cập nhật dns server khi xác nhận gán IP không</li>
+<li><code>subnet &lt;192.168.109.0&gt; netmask &lt;255.255.255.0&gt; </code>: địa chỉ mạng và định nghĩa mạng của server(sử dụng <code>ip -c a</code>)</li>
+<li><code>range &lt;192.168.109.100&gt; &lt;192.168.109.200&gt;</code>: dải IP mà Server sẽ gán cho thiết bị</li>
+<li><code>option routers &lt;192.168.109.254&gt;</code>: server &quot;khuyến khích&quot; các thiết bị sử dụng làm default gateway</li>
+<li><code>option domain-name-servers &lt;192.168.109.135&gt; &lt;192.168.109.136&gt;</code>: dns server kèm theo với default gateway</li>
+<li><code>host &lt;dungnt-dns&gt;</code>: tên host của thiết bị muốn gán IP cố định</li>
+<li><code>hardware &lt;ethernet&gt; &lt;00:0c:29:8f:ff:3a&gt;</code>: phần cứng mạng của thiết bị(tên và địa chỉ IPv6)</li>
+<li><code>fixed-address 192.168.109.10</code>: địa chỉ IP muốn gán cố định</li>
+</ul>
+<p>Gán DHCP Server cho 1 giao diện cụ thể tại <code>/etc/default/isc-dhcp-server</code>:</p>
+<pre><code>INTERFACESv4=&quot;ens33&quot;
+</code></pre>
+<p>Khởi động lại DHCP server</p>
+<pre><code> sudo systemctl restart isc-dhcp-server
+</code></pre>
+<p>Kiểm tra DHCP server</p>
+<pre><code> sudo systemctl status isc-dhcp-server
+</code></pre>
+<p>hoặc</p>
+<pre><code> journalctl _PID=&lt;id của isc-dhcp-server&gt;
+</code></pre>
+</li>
+</ol>
+<p><a href="#sysadminintern">back to top</a></p>
+<h3 id="ssh">SSH</h3>
+<p>Cho phép kết nối giữa máy chủ và máy khách một cách bảo mật, có thể bằng mật khẩu, key(1 cặp public và private key).</p>
+<p>Private key dùng để định danh người dùng, chỉ được lưu tại máy người dùng, không chia sẻ.</p>
+<p>Public key dùng để xác thực người dùng, copy tới ssh host. Khi client muốn ssh sử dụng key, public key sẽ được kiểm tra với private key, nếu phù hợp sẽ cho kết nối.</p>
+<p>SSH cung cấp giao diện chữ(terminal) để làm việc, các câu lệnh được gửi tới máy khách và thực hiện tại đó.</p>
+<p>SSH tới host</p>
+<pre><code>ssh &lt;user_name&gt;@&lt;IP|domain of host&gt;
+</code></pre>
+<p>nếu tên người client dùng trùng với tên người dùng tại host</p>
+<pre><code>ssh &lt;IP|domian of host&gt;
+</code></pre>
+<p>Mặc định sẽ ssh sử dụng port 22, nếu muốn sử dụng port khác</p>
+<pre><code>ssh &lt;user_name&gt;@&lt;IP|domain of host&gt; -p &lt;port_number&gt;
+</code></pre>
+<p>Copy <code>public key</code> tới host --&gt; ssh không cần mật khẩu</p>
+<pre><code>ssh-copy-id &lt;use_name&gt;@&lt;IP|domain of host&gt;
+</code></pre>
+<p>hoặc</p>
+<pre><code>cat ~/.ssh/id_rsa.pub | ssh &lt;user_name&gt;@&lt;IP|domain of host&gt; &quot;mkdir -p ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys&quot;
+</code></pre>
+<p>Tạo key ssh</p>
+<pre><code>ssh-keygen 
+</code></pre>
+<p>Mặc định sẽ tạo ra key RSA 2048 bit. Có thể tùy biến như loại xác thực, số byte, ....</p>
+<pre><code>ssh-keygen -t &lt;authentication_type&gt; -b &lt;byte number&gt; ...
+</code></pre>
+<p>Trong lúc tạo key có thể cài thêm mật khẩu cho key để tăng bảo mật. Thay đổi mật khẩu này bằng</p>
+<pre><code>ssh-keygen -f &lt;private_key&gt; -p
+</code></pre>
+<p>Khi private key có mật khẩu mà không muốn nhập lại mật khẩu đó mỗi lần ssh, sử dụng <code>ssh-add</code></p>
+<pre><code>eval $(ssh-agent) -- khởi chạy agent trong nền
+ssh-add		   -- thêm private key để agent quản lý
+</code></pre>
+<p><a href="#sysadminintern">back to top</a></p>
+<h3 id="rsync-và-scp">rsync và scp</h3>
+<p>rsync trên cùng 1 máy</p>
+<pre><code>rsync [option]... source... dest
+</code></pre>
+<p>rsync trên 2 máy khác nhau</p>
+<ul>
+<li>
+<p>Từ client đến server</p>
+<pre><code>  rsync -azv source &lt;user_name&gt;@&lt;IP|domain of host&gt;:dest
+</code></pre>
+</li>
+<li>
+<p>Từ server đến client tại client</p>
+<pre><code>  rsync -azve ssh &lt;user_name&gt;@&lt;IP|domain of host&gt;:source dest
+</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><code>-a</code>: tất cả symlink, thuộc tính, quyền,... đều được giữ nguyên</li>
+<li><code>-z</code>: nén các file trong lúc truyền</li>
+<li><code>-v</code>: hiện quá trình</li>
+<li><code>-e</code>: remote shell sử dụng, ở đây là ssh</li>
+</ul>
+</li>
+</ul>
+<p>scp trên cùng 1 máy</p>
+<pre><code>scp [option]... source... dest
+</code></pre>
+<p>scp trên 2 máy khác nhau</p>
+<ul>
+<li>
+<p>Từ client đến server</p>
+<pre><code>  scp source... &lt;user_name&gt;@&lt;IP|domain of host&gt;:/dest
+</code></pre>
+</li>
+<li>
+<p>Giữa 2 server thông qua client</p>
+<pre><code>  scp -3 &lt;user_name1&gt;@&lt;IP|domain of host 1&gt;:&lt;port_number&gt;/path/to/source &lt;user_name2&gt;@&lt;IP|domain of host 2&gt;:&lt;port_number&gt;/path/to/dest
+</code></pre>
+<p>Lưu ý đường dẫn là <code>path/to/source</code>, <code>path/to/dest</code> nếu muốn đường tuyệt đối sử dụng <code>&lt;user_name1&gt;@&lt;IP|domain of host 1&gt;:&lt;port_number&gt;//absolute/path</code></p>
+</li>
+</ul>
+<p>Sao lưu ổ cứng sử dụng <code>dd</code>:</p>
+<pre><code>dd if=/dev/&lt;source&gt; of=/dev/&lt;dest&gt; bs=64K conv=noerror,sync status=progress
+</code></pre>
+<p>Copy file từ ổ cứng này sang ổ cứng khác (bắt buộc phải có mount point):</p>
+<pre><code>rsync -av --progress /path/of/source /path/of/dest
+</code></pre>
+<p><a href="#sysadminintern">back to top</a></p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
